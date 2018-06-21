@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { Modal, Button, Collapsible, CollapsibleItem  } from 'react-materialize';
+import { Modal, Button } from 'react-materialize';
 
 const styles = {
   fontFamily: "sans-serif",
