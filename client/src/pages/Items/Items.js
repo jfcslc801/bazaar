@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import listedItems from "./../../../src/listed.json";
 import ItemCard from "./../../components/ItemCard";
 import { Table1, TableItem } from './../../components/BarterWindow';
+
 import "./Items.css";
 
 // This is a cheap fix, using this as a psuedo database for the time being until we have data stored in a database
@@ -44,6 +45,7 @@ class Items extends Component {
 	render() {
 		return (
 			<span className="App">
+
 				<h1> Listed Items </h1>
 
 
@@ -58,7 +60,6 @@ class Items extends Component {
 					/>
 				))}
 				</Table1>
-
 
 				{this.state.listedItems.map(listed => (
 					<ItemCard
@@ -76,3 +77,4 @@ class Items extends Component {
 }
 
 export default Items;
+
