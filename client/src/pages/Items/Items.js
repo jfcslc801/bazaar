@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import listedItems from "./../../../src/listed.json";
 import ItemCard from "./../../components/ItemCard";
-import { List, ListItem, Table1, TableItem } from './../../components/BarterWindow';
-import CustomModal from "./../../components/Modal";
+import { Table1, TableItem } from './../../components/BarterWindow';
 import "./Items.css";
 
 // This is a cheap fix, using this as a psuedo database for the time being until we have data stored in a database
