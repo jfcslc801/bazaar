@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import listedItems from "./../../../src/listed.json";
 import ItemCard from "./../../components/ItemCard";
+import CustomModal from "./../../components/Modal";
 import { List, ListItem } from './../../components/BarterWindow';
 import "./Items.css";
 
@@ -22,20 +23,6 @@ class Items extends Component {
 	render() {
 		return (
 			<span className="App">
-				<h1> Listed Items </h1>
-
-				<List>
-					<ListItem
-						date={dbOffer.date}
-						offer={dbOffer.offer}
-						itemDetails={dbOffer.itemDetails}
-						user={dbOffer.user}
-					>
-					</ListItem>
-				</List>
-
-
-
 				{this.state.listedItems.map(listed => (
 					<ItemCard
 						id={listed.id}
@@ -46,10 +33,10 @@ class Items extends Component {
 						location={listed.location}
 					/>
 				))}
-				{/* <div className="clear-fix">.</div> */}
 			</span>
 		);
 	}
 }
 
 export default Items;
+
