@@ -46,17 +46,7 @@ class Items extends Component {
 			<span className="App">
 				<h1> Listed Items </h1>
 
-				{/* <List>
-					<ListItem
-						date={dbOffer.date}
-						offer={dbOffer.offer}
-						itemDetails={dbOffer.itemDetails}
-						user={dbOffer.user}
-					>
-					</ListItem>
-				</List> */}
 
-				{/* <CustomModal> */}
 				<Table1>
 				{dbOffer.map(offer => (
 					<TableItem
@@ -68,7 +58,6 @@ class Items extends Component {
 					/>
 				))}
 				</Table1>
-				{/* </CustomModal> */}
 
 
 				{this.state.listedItems.map(listed => (
@@ -81,7 +70,6 @@ class Items extends Component {
 						location={listed.location}
 					/>
 				))}
-				{/* <div className="clear-fix">.</div> */}
 			</span>
 		);
 	}
