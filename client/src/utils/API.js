@@ -3,6 +3,7 @@ import axios from "axios";
 export default {
   // Gets all items
   getItems: function() {
+		console.log("Inside getItems");
     return axios.get("/api/items");
   },
   // Gets the item with the given id

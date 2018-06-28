@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import listedItems from "./../../../src/listed.json";
+import API from "../../utils/API";
+// import listedItems from "./../../../src/listed.json";
 import ItemCard from "./../../components/ItemCard";
 // import { Container } from './../../components/Grid/Container';
 import "./Items.css";
@@ -7,7 +8,20 @@ import "./Items.css";
 class Items extends Component {
 
 	state = {
-		listedItems
+		listedItems : []
+	};
+
+	componentDidMount() {
+		this.loadItems();
+	}
+
+	loadItems = () => {
+		console.log("Before Calling API");
+		API.getItems()
+			.then(res =>
+				this.setState({ listedItems: res.data })
+			)
+			.catch(err => console.log(err));
 	};
 
 	render() {
@@ -18,9 +32,9 @@ class Items extends Component {
 						<ItemCard
 							id={listed.id}
 							key={listed.id}
-							name={listed.name}
-							image={listed.image}
-							value={listed.value}
+							name={listed.itemName}
+							image={listed.image_url}
+							value={listed.listed_price}
 							location={listed.location}
 						/>
 					))}
