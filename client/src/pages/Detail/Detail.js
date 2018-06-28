@@ -12,14 +12,16 @@ import "./Detail.css";
 
 class Listing extends Component {
   state = {
-    books: [],
-    title: "",
-    author: "",
-    synopsis: ""
-  };
 
+    item: {}
+  };
+  // When this component mounts, grab the item with the _id of this.props.match.params.id
+  // e.g. localhost:3000/items/599dcb67f0f16317844583fc
   componentDidMount() {
-    this.loadBooks();
+    API.getItem(this.props.match.params.id)
+      .then(res => this.setState({ item: res.data }))
+      .catch(err => console.log(err));
+
   }
 
   loadBooks = () => {
@@ -80,6 +82,7 @@ class Listing extends Component {
             <h3>No Results to Display</h3>
           )}
       </div>
+
     );
   }
 }
