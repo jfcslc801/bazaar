@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import listedItems from "./../../../src/listed.json";
 import ItemCard from "./../../components/ItemCard";
-import { Container } from './../../components/Grid/Container';
+// import { Container } from './../../components/Grid/Container';
 import "./Items.css";
 class Items extends Component {
 
@@ -24,7 +24,6 @@ class Items extends Component {
 							location={listed.location}
 						/>
 					))}
-					{/* <div className="clear-fix">.</div> */}
 			</span>
 		);
 	}
