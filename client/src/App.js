@@ -5,6 +5,11 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import firebase from "firebase/app";
 import "firebase/auth";
+import Listing from "./pages/Listing";
+import Detail from "./pages/Detail";
+import NoMatch from "./pages/NoMatch";
+
+
 
 // Initialize Firebase
 var config = {
@@ -80,8 +85,9 @@ logIn = (inputEmail, inputPassword) => {
 
           <Switch>
           <Route path="/" render={()=> <Items signUp={this.signUp} />}/>
-            {/* <Route exact path="/" component={Items} /> */}
-            <Route component={NoMatch} />
+        <Route exact path="/Listing" component={Listing} />
+        <Route exact path="/Detail" component={Detail} />
+        <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
@@ -91,3 +97,4 @@ logIn = (inputEmail, inputPassword) => {
 };
 
 export default App;
+
