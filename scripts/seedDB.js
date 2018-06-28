@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const db = require("../models");
 mongoose.Promise = global.Promise;
 
-// This file empties the Books collection and inserts the books below
+// This file empties the Items collection and inserts the items below
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",
+  process.env.MONGODB_URI || "mongodb://localhost/reactitemlist",
   {
     useMongoClient: true
   }
@@ -13,87 +13,87 @@ mongoose.connect(
 
 const itemSeed = [
   {
-    "id": 1,
-    "name": "beth",
-    "image": "./assets/beth.png",
-    "value": "15.00",
+        "itemName": "beth",
+        "userID":"iz2@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "15.00",
     "location": "Sandy, UT"
   },
   {
-    "id": 2,
-    "name": "birdperson",
-    "image": "./assets/birdperson.png",
-    "value": "278.00",
+    "itemName": "birdperson",
+        "userID":"iz3@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "278.00",
     "location": "Salt Lake City, UT"
   },
   {
-    "id": 3,
-    "name": "evilmorty",
-    "image": "./assets/evilmorty.png",
-    "value": "4.00",
+    "itemName": "evilmorty",
+        "userID":"iz5@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "4.00",
     "location": "New York, NY"
   },
   {
-    "id": 4,
-    "name": "gainthead",
-    "image": "./assets/gainthead.png",
-    "value": "69.00",
+    "itemName": "gainthead",
+        "userID":"iz2@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "69.00",
     "location": "Jersey City, NJ"
   },
   {
-    "id": 5,
-    "name": "goldenford",
-    "image": "./assets/goldenford.png",
-    "value": "104.00",
+    "itemName": "goldenford",
+        "userID":"iz3@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "104.00",
     "location": "Salt Lake City, UT"
   },
   {
-    "id": 6,
-    "name": "jerry",
-    "image": "./assets/jerry.png",
-    "value": "25.00",
+    "itemName": "jerry",
+        "userID":"iz5@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "25.00",
     "location": "Providence, RI"
   },
   {
-    "id": 7,
-    "name": "jessica",
-    "image": "./assets/jessica.png",
-    "value": "99.99",
+    "itemName": "jessica",
+        "userID":"iz2@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "99.99",
     "location": "Charlotte, NC"
   },
   {
-    "id": 8,
-    "name": "meeseeks",
-    "image": "./assets/meeseeks.png",
-    "value": "75.00",
+    "itemName": "meeseeks",
+        "userID":"iz2@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "75.00",
     "location": "Indianapolis, IN"
   },
   {
-    "id": 9,
-    "name": "morty",
-    "image": "./assets/morty.png",
-    "value": "52.60",
+    "itemName": "morty",
+        "userID":"iz2@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "52.60",
     "location": "Cheyenne, WY"
   },
   {
-    "id": 10,
-    "name": "mr",
-    "image": "./assets/mr.png",
-    "value": "48.62",
+    "itemName": "mr",
+        "userID":"iz2@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "48.62",
     "location": "San Francisco, CA"
   },
   {
-    "id": 11,
-    "name": "rick",
-    "image": "./assets/rick.png",
-    "value": "26.05",
+    "itemName": "rick",
+        "userID":"iz3@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "26.05",
     "location": "Chicago, IL"
   },
   {
-    "id": 12,
-    "name": "summer",
-    "image": "./assets/summer.png",
-    "value": "108.08",
+    "itemName": "summer",
+        "userID":"iz5@gmail.com",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Spongebob-squarepants.svg/666px-Spongebob-squarepants.svg.png",
+    "listed_price": "108.08",
     "location": "Las Vegas, NV"
   }
 ]
