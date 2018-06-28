@@ -3,12 +3,12 @@ import listedItems from "./../../../src/listed.json";
 import ItemCard from "./../../components/ItemCard";
 // import { Container } from './../../components/Grid/Container';
 import "./Items.css";
+
 class Items extends Component {
 
 	state = {
 		listedItems
 	};
-
 
 	render() {
 		return (
