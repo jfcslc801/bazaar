@@ -8,7 +8,7 @@ const itemSchema = new Schema({
   description: String,
   location: {type: String, required: true},
   date: { type: Date, default: Date.now },
-  image_url: {type: URL, required: true}
+  image_url: {type: String, required: true}
 });
 
 const Item = mongoose.model("Item", itemSchema);
