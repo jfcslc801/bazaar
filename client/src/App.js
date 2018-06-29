@@ -7,7 +7,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
 
 
 
@@ -84,7 +83,7 @@ logIn = (inputEmail, inputPassword) => {
           <Nav signUp={this.signUp} logIn={this.logIn} isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
 
           <Switch>
-          <Route path="/" render={()=> <Items signUp={this.signUp} />}/>
+          <Route exact path="/" render={()=> <Items signUp={this.signUp} />}/>
         <Route exact path="/Listing" component={Listing} />
         <Route exact path="/Detail" component={Detail} />
         <Route component={NoMatch} />
