@@ -20,23 +20,23 @@ class Listing extends Component {
     image_url: ""
   };
 
-  componentDidMount() {
-    this.loadBooks();
-  }
+  // componentDidMount() {
+  //   this.loadBooks();
+  // }
 
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
-      .catch(err => console.log(err));
-  };
+  // loadBooks = () => {
+  //   API.getBooks()
+  //     .then(res =>
+  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
+  // deleteBook = id => {
+  //   API.deleteBook(id)
+  //     .then(res => this.loadBooks())
+  //     .catch(err => console.log(err));
+  // };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -47,20 +47,20 @@ class Listing extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.location && this.state.date && this.state.image_url) {
+    // if (this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.location && this.state.date && this.state.image_url) {
       API.saveItem({
         itemName: this.state.itemName,
         userID: this.state.userID,
         listed_price: this.state.listed_price,
         description: this.state.description,
         location: this.state.location,
-        date: this.state.date,
+        // date: this.state.date,
         image_url: this.state.image_url
       })
-        .then(res => this.loadBooks())
+        .then(res => console.log("success"))
         .catch(err => console.log(err));
-    }
-    console.log("success")
+    // }
+    
 
   };
 
