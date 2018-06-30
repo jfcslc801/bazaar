@@ -47,20 +47,17 @@ class Listing extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    // if (this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.location && this.state.date && this.state.image_url) {
-      API.saveItem({
-        itemName: this.state.itemName,
-        userID: this.state.userID,
-        listed_price: this.state.listed_price,
-        description: this.state.description,
-        location: this.state.location,
-        // date: this.state.date,
-        image_url: this.state.image_url
-      })
-        .then(res => console.log("success"))
-        .catch(err => console.log(err));
-    // }
-    
+    API.saveItem({
+      itemName: this.state.itemName,
+      userID: this.state.userID,
+      listed_price: this.state.listed_price,
+      description: this.state.description,
+      location: this.state.location,
+      image_url: this.state.image_url
+    })
+      .then(res => console.log("success"))
+      .catch(err => console.log(err));
+
 
   };
 
@@ -71,58 +68,59 @@ class Listing extends Component {
 
 
       <div className="contDiv">
-
-        <Card className='listing  red  lighten-1 black-text' textColor='red' title='Barter Up!'>
-          <TextArea
+        <br />
+        <br />
+        <br />
+        <h2>Barter Up!</h2>
+        <Row>
+          <Input label="Item Name"
+            s={12} m={6}
             value={this.state.itemName}
             onChange={this.handleInputChange}
             name="itemName"
-            placeholder="Item (required)"
+            validate
           />
-          <TextArea
+          <Input label="userID"
+            s={12} m={6}
             value={this.state.userID}
             onChange={this.handleInputChange}
             name="userID"
-            placeholder="User ID (required)"
+            validate
           />
-          <TextArea
+          <Input label="Listing Price"
+            s={12} m={6}
             value={this.state.listed_price}
             onChange={this.handleInputChange}
             name="listed_price"
-            placeholder="Listed Price (required)"
+            type="number"
+            validate
           />
-          <TextArea
+          <Input label="Description"
+            s={12} m={6}
             value={this.state.description}
             onChange={this.handleInputChange}
             name="description"
-            placeholder="Description (required)"
           />
-          <TextArea
+          <Input label="Location"
+            s={12} m={6}
             value={this.state.location}
             onChange={this.handleInputChange}
             name="location"
-            placeholder="Location (Optional)"
+            validate
           />
-          <TextArea
-            value={this.state.date}
-            onChange={this.handleInputChange}
-            name="date"
-            placeholder="Date (Optional)"
-          />
-          <TextArea
+          <Input label="Image"
+            s={12} m={6}
             value={this.state.image_url}
             onChange={this.handleInputChange}
             name="image_url"
-            placeholder="Picture (required)"
+            validate
           />
           <FormBtn
             disabled={!(this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.image_url)}
             onClick={this.handleFormSubmit}
-          >
-            Submit
-              </FormBtn>
-        </Card>
-
+          > Submit
+          </FormBtn>
+        </Row>
       </div>
     );
   }

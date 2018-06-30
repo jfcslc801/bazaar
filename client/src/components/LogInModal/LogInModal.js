@@ -10,7 +10,7 @@ class LogIn extends Component {
   constructor(props) {
 		super(props);
 		this.state = {
-      open: false,
+      open: props.isOpen,
       email: '',
       password: ''
     };
@@ -49,14 +49,17 @@ class LogIn extends Component {
     return (
       // <div style={styles}>
         <Modal
+          open={this.state.open}
+          id={this.props.modalID}
           header='Log In'
-          trigger={<NavItem ><i class="large material-icons">account_circle</i></NavItem>}>
+          >
           <div>
             <Row>
               <Input s={12} name="email" label="Email" validate value={this.state.email} onChange={this.handleChange}><Icon>account_circle</Icon></Input>
               <Input s={12} name="password" label="Password" validate value={this.state.password} onChange={this.handleChange} type='password'><Icon>lock</Icon></Input>
               <Button onClick={this.signUp} waves='light'>Sign Up</Button>
               <Button onClick={this.logIn} waves='light'>Log In</Button>
+              <Button onClick={this.props.logOut} waves='light'>Log Out</Button>
             </Row>
           </div>
         </Modal>

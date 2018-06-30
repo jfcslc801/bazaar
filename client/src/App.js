@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {$,jQuery} from 'jquery';
+// export for others scripts to use
+// window.$ = $;
+// window.jQuery = jQuery;
 import Items from "./pages/Items";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
+import LogIn from "./components/LogInModal";
 import firebase from "firebase/app";
 import "firebase/auth";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
+
 
 
 
@@ -22,16 +28,45 @@ var config = {
 firebase.initializeApp(config);
 // Variables with user authentication
 const auth = firebase.auth();
-auth.onAuthStateChanged(firebaseUser => { });
+auth.onAuthStateChanged(firebaseUser => {
+  if (firebaseUser) {
+    // user = firebaseUser;
+    console.log(firebaseUser)
+    console.log("is this working?")
+    console.log(firebaseUser.email)
+    // console.log(user.uid + 'this is your uid');
+    // console.log(firebaseUser.Kb.I)
+    // logOut.classList.remove("hide");
+    // $("#profileHeader").text("Welcome " + firebaseUser.email + "!");
+    // profileGetAJAX();
+  } else {
+    // console notification that the user is not logged in
+    console.log('not logged in');
+
+    // links to navbar
+    // logOut.classList.add("hide");
+    // $("#userName").html("<a href='/'>Hi! Click to Log In</a>");
+  }
+});
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-      isLoggedIn : false,
-      username : null
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      username: null,
+      logInModalOpen: false
     };
-    
+
+  }
+
+
+  logInModalTrigger = () => {
+    console.log('you hit the trigger');
+
+    this.setState(prevState => ({
+      logInModalOpen: !prevState.logInModalOpen
+    }));
   }
 
   signUp = (inputEmail, inputPassword) => {
@@ -42,8 +77,8 @@ class App extends Component {
       .then(response => {
         console.log('response', response);
         this.setState({
-          username : response.user.email,
-          isLoggedIn : true
+          username: response.user.email,
+          isLoggedIn: true
         })
       })
       .catch(e => {
@@ -54,10 +89,10 @@ class App extends Component {
         // logInError();
       });
 
-}
+  }
 
-logIn = (inputEmail, inputPassword) => {
-  
+  logIn = (inputEmail, inputPassword) => {
+
     // Sign in 
     const promise = auth.signInWithEmailAndPassword(inputEmail, inputPassword);
     promise
@@ -71,22 +106,38 @@ logIn = (inputEmail, inputPassword) => {
 
       });
 
-}
+  }
+
+  logOut = () => {
+
+    auth.signOut();
+
+  }
 
   render() {
-    console.log(this);
-    
+    console.log(this.state.logInModalOpen);
+
     return (
 
       <Router>
         <div>
-          <Nav signUp={this.signUp} logIn={this.logIn} isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
+          <Nav
+            signUp={this.signUp}
+            logIn={this.logIn}
+            isLoggedIn={this.state.isLoggedIn}
+            username={this.state.username}
+            logOut={this.logOut}
+          />
+
+          <LogIn modalID="log-in" isOpen={this.state.logInModalOpen} />
+
+          <button onClick={this.logInModalTrigger}>tetsingtrigger</button>
 
           <Switch>
-          <Route exact path="/" render={()=> <Items signUp={this.signUp} />}/>
-        <Route exact path="/Listing" component={Listing} />
-        <Route exact path="/Detail" component={Detail} />
-        <Route component={NoMatch} />
+            <Route exact path="/" render={() => <Items signUp={this.signUp} />} />
+            <Route exact path="/Listing" component={Listing} />
+            <Route exact path="/Detail" component={Detail} />
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
@@ -96,4 +147,3 @@ logIn = (inputEmail, inputPassword) => {
 };
 
 export default App;
-
