@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem, Icon } from 'react-materialize';
 import LogIn from "./../../components/LogInModal"
-import {$,jQuery} from 'jquery';
+// import {$,jQuery} from 'jquery';
 // export for others scripts to use
 // window.$ = $;
 // window.jQuery = jQuery;
@@ -33,7 +33,7 @@ class Nav extends Component {
           } */}
           <NavItem onClick={() => {
             // event.preventDefault();
-            $('#log-in').modal('open')
+            // $('#log-in').modal('open')
           }}
           ><Icon>search</Icon></NavItem>
           <NavItem href='get-started.html'><i class="large material-icons">location_on</i></NavItem>

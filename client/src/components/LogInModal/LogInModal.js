@@ -10,11 +10,21 @@ class LogIn extends Component {
   constructor(props) {
 		super(props);
 		this.state = {
-      open: props.isOpen,
+      open: false,
       email: '',
       password: ''
     };
   };
+
+  componentDidMount() {
+    this.setState({
+      open: this.props.isOpen
+    }, () => {
+      console.log("this.state.open")
+      console.log(this.state.open)
+    }
+  )
+  }
 
   handleChange = (event) => {
     const target = event.target;
@@ -25,6 +35,8 @@ class LogIn extends Component {
       [name]: value
     });
   }
+
+  
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -49,7 +61,7 @@ class LogIn extends Component {
     return (
       // <div style={styles}>
         <Modal
-          open={this.state.open}
+          // open='true'
           id={this.props.modalID}
           header='Log In'
           >

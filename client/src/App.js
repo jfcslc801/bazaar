@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {$,jQuery} from 'jquery';
+// import {$,jQuery} from 'jquery';
 // export for others scripts to use
 // window.$ = $;
 // window.jQuery = jQuery;
 import Items from "./pages/Items";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
+import CustomModal from "./components/Modal";
 import LogIn from "./components/LogInModal";
 import firebase from "firebase/app";
 import "firebase/auth";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
+import DeleteBtn from './components/DeleteBtn';
 
 
 
@@ -129,9 +131,12 @@ class App extends Component {
             logOut={this.logOut}
           />
 
-          <LogIn modalID="log-in" isOpen={this.state.logInModalOpen} />
+          <CustomModal> 
+          <DeleteBtn modalID="log-in" isOpen={this.state.logInModalOpen} />
+          </CustomModal>
+          
 
-          <button onClick={this.logInModalTrigger}>tetsingtrigger</button>
+          {/* <button onClick={this.logInModalTrigger}>tetsingtrigger</button> */}
 
           <Switch>
             <Route exact path="/" render={() => <Items signUp={this.signUp} />} />

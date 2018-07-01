@@ -11,6 +11,15 @@ class CustomModal extends React.Component {
     open: false
   };
 
+
+  openModal = () => {
+    this.setState({ open: true }, 
+    () => {
+      console.log('modal.js state open' + this.state.open);
+      
+    }
+    );
+  };
   onOpenModal = () => {
     this.setState({ open: true });
   };
@@ -23,11 +32,16 @@ class CustomModal extends React.Component {
     const { open } = this.state;
     return (
       <div style={styles}>
+      {React.cloneElement(this.props.children, { openModal: this.openModal })}
         <Modal
-          header='Modal Header'
-          trigger={<Button className="">Modal</Button>}>
+        open={this.state.open}
+        id='normal-modal'
+          header='Modal Header'>
           <div>
             {this.props.children}
+         
+    
+
           </div>
         </Modal>
       </div>
