@@ -21,7 +21,7 @@ class Nav extends Component {
     render () {
       return (
         <div>
-        <Navbar brand='Bazaar' right>
+        <Navbar brand={<img src="../assets/Bazzarlogo.png" height="60"/>} right>
           <LogIn signUp={this.props.signUp} logIn={this.props.logIn} />
           {/* {!props.isLoggedIn ? 
           <NavItem href='get-started.html'><i class="large material-icons">account_circle</i></NavItem>
