@@ -6,6 +6,6 @@ const offerRoutes = require("./offers");
 // Item routes
 router.use("/items", itemRoutes); 
 router.use("/users", userRoutes); 
-router.use("/offer", offerRoutes); 
+router.use("/offers", offerRoutes); 
 
 module.exports = router;
