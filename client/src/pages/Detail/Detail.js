@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 // import { Col, Row, Container } from "../../components/Grid";
 // import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Row, Input, Card, Col, CardTitle, Button, Icon } from 'react-materialize';
+import { Input, Card, CardTitle, Button, Icon } from 'react-materialize';
 import DeleteBtn from "../../components/DeleteBtn";
+import CustomCardPanel from "../../components/CardPanel";
+import DataPanel from "../../components/DataPanel";
+import CustomTable from "../../components/Table";
 import { List, ListItem } from "../../components/List";
 import "./Detail.css";
 
@@ -62,25 +65,13 @@ class Listing extends Component {
     return (
 
 
-      <div className="contDiv listing">
+      <div className="container">
+        <CustomCardPanel>
 
-        {this.state.books.length ? (
-          <Card className="items" title='Posted Up!'>
-            {/* <h1>Books On My List</h1> */}
-            {this.state.books.map(book => (
-              <List key={book._id}>
-                <Link to={"/Listing/" + book._id}>
-                  <strong>
-                    {book.title} by {book.author}
-                  </strong>
-                </Link>
-                <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-              </List>
-            ))}
-          </Card>
-        ) : (
-            <h3>No Results to Display</h3>
-          )}
+        </CustomCardPanel>
+        <DataPanel>
+
+        </DataPanel>
       </div>
 
     );
