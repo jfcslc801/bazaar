@@ -18,12 +18,21 @@ class Nav extends Component {
   }
 
 
+
   render() {
     return (
       <div>
 
-        <Navbar brand='Bazaar' right>
-          <LogIn signUp={this.props.signUp} logIn={this.props.logIn}> </LogIn>
+      <Navbar brand={<img src="../assets/Bazzarlogo.png" height="60"/>} right>
+
+        
+          <LogIn signUp={this.props.signUp} logIn={this.props.logIn} />
+          {/* {!props.isLoggedIn ? 
+          <NavItem href='get-started.html'><i class="large material-icons">account_circle</i></NavItem>
+          :
+          <NavItem href='get-started.html'>{props.username}</NavItem>
+          } */}
+
         </Navbar>
 
         <Button floating fab='vertical' icon='mode_edit' className='purple' faicon='fa fa-plus' className='blue' large style={{ bottom: '45px', right: '24px' }}>
