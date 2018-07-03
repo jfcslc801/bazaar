@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import {$,jQuery} from 'jquery';
-// export for others scripts to use
-// window.$ = $;
-// window.jQuery = jQuery;
+import { firebase } from './firebase';
 import Items from "./pages/Items";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import CustomModal from "./components/Modal";
 import LogIn from "./components/LogInModal";
-import firebase from "firebase/app";
-import "firebase/auth";
+// import firebase from "firebase/app";
+// import "firebase/auth";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
 import DeleteBtn from './components/DeleteBtn';
@@ -18,46 +15,14 @@ import SimpleModal from './components/MaterialModal';
 
 
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyDbX869774z70nCO0tq_S2JRqLV_1118KM",
-  authDomain: "bazaar-260d7.firebaseapp.com",
-  databaseURL: "https://bazaar-260d7.firebaseio.com",
-  projectId: "bazaar-260d7",
-  storageBucket: "bazaar-260d7.appspot.com",
-  messagingSenderId: "188721019857"
-};
-firebase.initializeApp(config);
-// Variables with user authentication
-const auth = firebase.auth();
-auth.onAuthStateChanged(firebaseUser => {
-  if (firebaseUser) {
-    // user = firebaseUser;
-    console.log(firebaseUser)
-    console.log("is this working?")
-    console.log(firebaseUser.email)
-    // console.log(user.uid + 'this is your uid');
-    // console.log(firebaseUser.Kb.I)
-    // logOut.classList.remove("hide");
-    // $("#profileHeader").text("Welcome " + firebaseUser.email + "!");
-    // profileGetAJAX();
-  } else {
-    // console notification that the user is not logged in
-    console.log('not logged in');
-
-    // links to navbar
-    // logOut.classList.add("hide");
-    // $("#userName").html("<a href='/'>Hi! Click to Log In</a>");
-  }
-});
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoggedIn: false,
       username: null,
-      logInModalOpen: false
+      logInModalOpen: false,
+      authUser: null
     };
 
   }
@@ -71,53 +36,24 @@ class App extends Component {
     }));
   }
 
-  signUp = (inputEmail, inputPassword) => {
-
-    // Sign up 
-    const promise = auth.createUserWithEmailAndPassword(inputEmail, inputPassword);
-    promise
-      .then(response => {
-        console.log('response', response);
-        this.setState({
-          username: response.user.email,
-          isLoggedIn: true
-        })
-      })
-      .catch(e => {
-        console.log(e.message)
-        // $("#errormessage").html(e.message);
-        console.log('you didnt sign in');
-        // run the error modal
-        // logInError();
-      });
-
-  }
-
-  logIn = (inputEmail, inputPassword) => {
-
-    // Sign in 
-    const promise = auth.signInWithEmailAndPassword(inputEmail, inputPassword);
-    promise
-      .then(response => {
-        console.log('logged in', response);
-
-      })
-      .catch(e => {
-        console.log(e.message)
-        console.log('you didnt sign in');
-
-      });
-
-  }
-
-  logOut = () => {
-
-    auth.signOut();
-
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ?
+          // () => {
+            // console.log('you are logged in');
+            this.setState(() => ({ authUser }))
+          // }
+        : 
+        // () => {
+          // console.log('you are not logged in');
+          this.setState(() => ({ authUser: null }));
+        // }
+    });
   }
 
   render() {
-    console.log(this.state.logInModalOpen);
+    console.log(this);
 
     return (
       // <MyProvider>

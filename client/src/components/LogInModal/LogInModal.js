@@ -4,6 +4,7 @@ import { Row, Icon, Input, Button } from 'react-materialize';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
+import { auth } from '../../firebase';
 
 const styles = theme => ({
   paper: {
@@ -51,11 +52,32 @@ class LogIn extends Component {
   };
 
   signUp = () => {
-    this.props.signUp(this.state.email, this.state.password)
+
+    auth.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(authUser => {
+      console.log('you have created a new user ' + authUser);
+      
+    })
+    .catch(e => {
+      console.log(e.message)
+      console.log('you didnt create a new user');
+
+    });
+
   }
 
   logIn = () => {
-    this.props.logIn(this.state.email, this.state.password)
+
+    auth.doSignInWithEmailAndPassword(this.state.email, this.state.password)
+    .then(authUser => {
+      console.log('you have logged in: ' + authUser);
+    })
+    .catch(e => {
+      console.log(e.message)
+      console.log('you didnt sign in');
+
+    });
+
   }
 
   render() {
@@ -78,7 +100,7 @@ class LogIn extends Component {
               <Input s={12} name="password" label="Password" validate value={this.state.password} onChange={this.handleChange} type='password'><Icon>lock</Icon></Input>
               <Button onClick={this.signUp} waves='light'>Sign Up</Button>
               <Button onClick={this.logIn} waves='light'>Log In</Button>
-              <Button onClick={this.props.logOut} waves='light'>Log Out</Button>
+              <Button onClick={auth.doSignOut} waves='light'>Log Out</Button>
               </div>
             </Row>
           </div>

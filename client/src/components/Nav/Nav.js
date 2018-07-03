@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem, Icon } from 'react-materialize';
 import LogIn from "./../../components/LogInModal"
-// import {$,jQuery} from 'jquery';
-// export for others scripts to use
-// window.$ = $;
-// window.jQuery = jQuery;
 
 class Nav extends Component {
 	constructor(props) {
@@ -37,7 +33,7 @@ class Nav extends Component {
           ><Icon>search</Icon></NavItem>
           <NavItem href='get-started.html'><i class="large material-icons">location_on</i></NavItem>
         </Navbar>
-        <p> {console.log("hello user" + this.props.username)}test </p>
+
         </div>
       
       )
