@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
+// import DeleteBtn from "../../components/DeleteBtn";
 import DataPanel from "../../components/DataPanel";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
-import { Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
+// import { Link } from "react-router-dom";
+// import { Container } from "../../components/Grid";
+// import { List, ListItem } from "../../components/List";
 import { TextArea, FormBtn } from "../../components/Form";
 import { Row, Input, Card, Col, CardTitle, Button, Icon } from 'react-materialize';
 import "./Listing.css";
@@ -69,7 +69,7 @@ class Listing extends Component {
 
       <div className="container">
         <DataPanel>
-        <h3>Welcome Home
+        <h3>Welcome: Listings!
         </h3>
           
         </DataPanel>
