@@ -72,7 +72,7 @@ class Listing extends Component {
 
       <div className="contDiv">
 
-        <Card className='listing  red  lighten-1 black-text' textColor='red' title='Barter Up!'>
+        <Card className='listing  grey  lighten-1 black-text' textColor='red' title='Barter Up!'>
           <TextArea
             value={this.state.itemName}
             onChange={this.handleInputChange}
@@ -117,7 +117,7 @@ class Listing extends Component {
           />
           <FormBtn
             disabled={!(this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.image_url)}
-            onClick={this.handleFormSubmit}
+            onClick={this.handleFormSubmit} node='a' href='/' 
           >
             Submit
               </FormBtn>
