@@ -1,25 +1,22 @@
-import React from "react";
-import { Modal, Button } from 'react-materialize';
+import React, { Component } from "react";
+// import { Modal, Button } from 'react-materialize';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 
 const styles = {
   fontFamily: "sans-serif",
   textAlign: "center"
 };
 
-class CustomModal extends React.Component {
+class CustomModal extends Component {
   state = {
     open: false
   };
 
 
-  openModal = () => {
-    this.setState({ open: true }, 
-    () => {
-      console.log('modal.js state open' + this.state.open);
-      
-    }
-    );
-  };
   onOpenModal = () => {
     this.setState({ open: true });
   };
@@ -29,24 +26,26 @@ class CustomModal extends React.Component {
   };
 
   render() {
-    const { open } = this.state;
+
     return (
-      <div style={styles}>
-      {React.cloneElement(this.props.children, { openModal: this.openModal })}
+      // <div style={styles}>
+
         <Modal
-        open={this.state.open}
-        id='normal-modal'
+          open={this.state.open}
+          onClose={this.onCloseModal}
+          id='normal-modal'
           header='Modal Header'>
           <div>
-            {this.props.children}
-         
-    
-
           </div>
         </Modal>
-      </div>
+      // </div>
     );
   }
 }
+
+
+CustomModal.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default CustomModal;

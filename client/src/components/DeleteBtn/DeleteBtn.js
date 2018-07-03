@@ -13,7 +13,7 @@ class DeleteBtn extends Component {
     
     return (
       <span onClick={this.props.openModal} className="delete-btn" {...this.props}>
-        ✗
+        ✗ try me to the left
       </span>
     )
   }

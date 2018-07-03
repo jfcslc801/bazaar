@@ -14,7 +14,7 @@ import "firebase/auth";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
 import DeleteBtn from './components/DeleteBtn';
-
+import SimpleModal from './components/MaterialModal';
 
 
 
@@ -120,23 +120,26 @@ class App extends Component {
     console.log(this.state.logInModalOpen);
 
     return (
-
+      // <MyProvider>
       <Router>
         <div>
-          <Nav
+          <Nav 
             signUp={this.signUp}
             logIn={this.logIn}
             isLoggedIn={this.state.isLoggedIn}
             username={this.state.username}
             logOut={this.logOut}
+            logInModalTrigger={this.logInModalTrigger}
           />
 
-          <CustomModal> 
-          <DeleteBtn modalID="log-in" isOpen={this.state.logInModalOpen} />
-          </CustomModal>
-          
+          {/* Ideally I would have my loginnav component here and just send the triggers to where they need to go. */}
+          <LogIn 
+            logInModalOpen={this.state.logInModalOpen}
+            logInModalTrigger={this.logInModalTrigger}
+          />
 
-          {/* <button onClick={this.logInModalTrigger}>tetsingtrigger</button> */}
+
+
 
           <Switch>
             <Route exact path="/" render={() => <Items signUp={this.signUp} />} />
@@ -146,6 +149,7 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
+      // </MyProvider>
     )
   }
 

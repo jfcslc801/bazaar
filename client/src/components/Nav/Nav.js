@@ -15,22 +15,21 @@ class Nav extends Component {
 
 	}
 
-  clicky = (event) => {
-    // console.log('test');
-    
-    return event;
-  }
-
-
     render () {
       return (
         <div>
+          
         <Navbar brand='Bazaar' right>
-          {/* {!props.isLoggedIn ? 
-          <NavItem href='get-started.html'><i class="large material-icons">account_circle</i></NavItem>
+          {!this.props.isLoggedIn ? 
+          <NavItem onClick={(event) => {
+            event.preventDefault();
+            this.props.logInModalTrigger()
+          }
+            
+          }><i class="large material-icons">account_circle</i></NavItem>
           :
-          <NavItem href='get-started.html'>{props.username}</NavItem>
-          } */}
+          <NavItem href='get-started.html'>{this.props.username}</NavItem>
+          }
           <NavItem onClick={() => {
             // event.preventDefault();
             // $('#log-in').modal('open')
