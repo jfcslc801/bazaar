@@ -13,7 +13,7 @@ router.route("/:id")
   .delete(itemsController.remove);
 
 router.route("/userListings/:userID")
-  .get(itemsController.getUserListings)
+  .get(itemsController.userListings)
   .delete(itemsController.deleteUserListings);
 
 module.exports = router;
