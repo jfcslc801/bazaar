@@ -12,6 +12,8 @@ import ItemCard from "../../components/ItemCard";
 import CustomTable from "../../components/Table";
 import { List, ListItem } from "../../components/List";
 import "./Detail.css";
+const uuidv1 = require('uuid/v1');
+uuidv1();
 
 
 
@@ -33,11 +35,15 @@ class Detail extends Component {
       .catch(err => console.log(err));
   };
 
-  removeListed = id => {
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    const listedItems = this.state.listedItems.filter(listed => listed.id !== id);
-    // Set this.state.friends equal to the new friends array
+  removeListed = (event, _id) => {
+    event.preventDefault();
+    console.log(event);
+    // // Filter this.state.friends for friends with an id not equal to the id being removed
+    const listedItems = this.state.listedItems.filter(listed => listed._id !== _id);
+    // // Set this.state.friends equal to the new friends array
     this.setState({ listedItems });
+    API.deleteItem(_id);
+
   };
 
   render() {
@@ -54,8 +60,8 @@ class Detail extends Component {
             {this.state.listedItems.map(listed => (
               <CustomCardPanel s={1} className='grid-example'
                 removeListed={this.removeListed}
-                id={listed.id}
-                key={listed.id}
+                id={listed._id}
+                key={listed._id}
                 name={listed.itemName}
                 image={listed.image_url}
                 user={listed.userID}
