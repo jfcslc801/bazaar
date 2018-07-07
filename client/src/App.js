@@ -85,7 +85,7 @@ logIn = (inputEmail, inputPassword) => {
           <Switch>
             <Route exact path="/" render={()=> <Items signUp={this.signUp} />}/>
             <Route exact path="/Listing" component={Listing} />
-            <Route exact path="/Detail" component={Detail} />
+            <Route exact path="/User" component={Detail} />
             <Route component={NoMatch} />
           </Switch>
         </div>
