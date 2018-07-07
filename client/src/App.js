@@ -6,8 +6,6 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import CustomModal from "./components/Modal";
 import LogIn from "./components/LogInModal";
-// import firebase from "firebase/app";
-// import "firebase/auth";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
 import DeleteBtn from './components/DeleteBtn';
@@ -74,7 +72,6 @@ class App extends Component {
             logInModalTrigger={this.logInModalTrigger}
           />
 
-          {/* Ideally I would have my loginnav component here and just send the triggers to where they need to go. */}
           <LogIn
             logInModalOpen={this.state.logInModalOpen}
             logInModalTrigger={this.logInModalTrigger}
@@ -99,3 +96,4 @@ class App extends Component {
 };
 
 export default App;
+

@@ -7,10 +7,13 @@ router.route("/")
   .post(itemsController.create);
 
 // Matches with "/api/items/:id"
-router
-  .route("/:id")
+router.route("/:id")
   .get(itemsController.findById)
   .put(itemsController.update)
   .delete(itemsController.remove);
+
+router.route("/userListings/:userID")
+  .get(itemsController.userListings)
+  .delete(itemsController.deleteUserListings);
 
 module.exports = router;

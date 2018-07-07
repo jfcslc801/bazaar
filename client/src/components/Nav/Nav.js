@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, Icon } from 'react-materialize';
+import { Navbar, NavItem, Icon, Button } from 'react-materialize';
 import LogIn from "./../../components/LogInModal"
 
 class Nav extends Component {
@@ -71,6 +71,7 @@ class Nav extends Component {
           
           <NavItem href='get-started.html'><i class="large material-icons">location_on</i></NavItem>
         </Navbar>
+
 
       </div>
 

@@ -3,88 +3,78 @@ import { Link } from "react-router-dom";
 // import { Col, Row, Container } from "../../components/Grid";
 // import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Row, Input, Card, Col, CardTitle, Button, Icon } from 'react-materialize';
+import { Input, Card, CardTitle, Button, Icon } from 'react-materialize';
 import DeleteBtn from "../../components/DeleteBtn";
+// import CustomCardPanel from "../../components/CardPanel";
+import DataPanel from "../../components/DataPanel";
+import CustomCardPanel from "../../components/CardPanel";
+import ItemCard from "../../components/ItemCard";
+import CustomTable from "../../components/Table";
 import { List, ListItem } from "../../components/List";
 import "./Detail.css";
+const uuidv1 = require('uuid/v1');
+uuidv1();
 
 
 
-class Listing extends Component {
+class Detail extends Component {
   state = {
-
-    item: {}
+    listedItems: []
   };
-  // When this component mounts, grab the item with the _id of this.props.match.params.id
-  // e.g. localhost:3000/items/599dcb67f0f16317844583fc
-  componentDidMount() {
-    API.getItem(this.props.match.params.id)
-      .then(res => this.setState({ item: res.data }))
-      .catch(err => console.log(err));
 
+  componentDidMount() {
+    this.loadItems();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadItems = () => {
+    console.log("Before Calling API");
+    API.getItems()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ listedItems: res.data })
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
-
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit = event => {
+  removeListed = (event, _id) => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-    }
+    console.log(event);
+    // // Filter this.state.friends for friends with an id not equal to the id being removed
+    const listedItems = this.state.listedItems.filter(listed => listed._id !== _id);
+    // // Set this.state.friends equal to the new friends array
+    this.setState({ listedItems });
+    API.deleteItem(_id);
+
   };
 
   render() {
     return (
 
-
-      <div className="contDiv listing">
-
-        {this.state.books.length ? (
-          <Card className="items" title='Posted Up!'>
-            {/* <h1>Books On My List</h1> */}
-            {this.state.books.map(book => (
-              <List key={book._id}>
-                <Link to={"/Listing/" + book._id}>
-                  <strong>
-                    {book.title} by {book.author}
-                  </strong>
-                </Link>
-                <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-              </List>
+      <div className="container">
+        <DataPanel>
+          <h4>Welcome: Your Offers!
+        </h4>
+        </DataPanel>
+        <DataPanel>
+          <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
+            {/*                     <h1> Listed Items </h1> */}
+            {this.state.listedItems.map(listed => (
+              <CustomCardPanel s={1} className='grid-example'
+                removeListed={this.removeListed}
+                id={listed._id}
+                key={listed._id}
+                name={listed.itemName}
+                image={listed.image_url}
+                user={listed.userID}
+                value={listed.listed_price}
+                location={listed.location}
+              />
             ))}
-          </Card>
-        ) : (
-            <h3>No Results to Display</h3>
-          )}
+          </div>
+        </DataPanel>
       </div>
 
     );
   }
 }
 
-export default Listing;
+export default Detail;
