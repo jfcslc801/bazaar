@@ -34,7 +34,7 @@ removeListed = (event, _id) => {
   const listedItems = this.state.listedItems.filter(listed => listed._id !== _id);
   // // Set this.state.friends equal to the new friends array
   this.setState({ listedItems });
-  // // api.deleteItem.(id);
+  API.deleteItem(_id);
 
 };
     render() {
