@@ -20,23 +20,7 @@ class Listing extends Component {
     image_url: ""
   };
 
-  // componentDidMount() {
-  //   this.loadBooks();
-  // }
 
-  // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -65,6 +49,7 @@ class Listing extends Component {
 
     console.log(this);
     return (
+
 
 
       <div className="container">
@@ -118,6 +103,7 @@ class Listing extends Component {
           </FormBtn>
           </Row>
         </DataPanel>
+
       </div>
     );
   }

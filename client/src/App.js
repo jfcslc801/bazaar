@@ -1,95 +1,95 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { firebase } from './firebase';
 import Items from "./pages/Items";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import firebase from "firebase/app";
-import "firebase/auth";
+import CustomModal from "./components/Modal";
+import LogIn from "./components/LogInModal";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
+import DeleteBtn from './components/DeleteBtn';
+import SimpleModal from './components/MaterialModal';
 
 
-
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyDbX869774z70nCO0tq_S2JRqLV_1118KM",
-  authDomain: "bazaar-260d7.firebaseapp.com",
-  databaseURL: "https://bazaar-260d7.firebaseio.com",
-  projectId: "bazaar-260d7",
-  storageBucket: "bazaar-260d7.appspot.com",
-  messagingSenderId: "188721019857"
-};
-firebase.initializeApp(config);
-// Variables with user authentication
-const auth = firebase.auth();
-auth.onAuthStateChanged(firebaseUser => { });
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-      isLoggedIn : false,
-      username : null
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      username: null,
+      logInModalOpen: false,
+      auth: null
     };
-    
+
   }
 
-  signUp = (inputEmail, inputPassword) => {
 
-    // Sign up 
-    const promise = auth.createUserWithEmailAndPassword(inputEmail, inputPassword);
-    promise
-      .then(response => {
-        console.log('response', response);
-        this.setState({
-          username : response.user.email,
-          isLoggedIn : true
-        })
-      })
-      .catch(e => {
-        console.log(e.message)
-        // $("#errormessage").html(e.message);
-        console.log('you didnt sign in');
-        // run the error modal
-        // logInError();
-      });
+  logInModalTrigger = () => {
+    console.log('you hit the trigger');
 
-}
+    this.setState(prevState => ({
+      logInModalOpen: !prevState.logInModalOpen
+    }));
+  }
 
-logIn = (inputEmail, inputPassword) => {
-  
-    // Sign in 
-    const promise = auth.signInWithEmailAndPassword(inputEmail, inputPassword);
-    promise
-      .then(response => {
-        console.log('logged in', response);
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
 
-      })
-      .catch(e => {
-        console.log(e.message)
-        console.log('you didnt sign in');
+      if (authUser) {
 
-      });
+        // console.log('you are logged in');
+        this.setState(() => ({ auth: authUser }))
+        console.log('app.js logged in');
 
-}
+
+      } else {
+
+        console.log('app.js you are not logged in');
+        this.setState(() => ({ auth: null }));
+
+
+      }
+
+    });
+  }
 
   render() {
     console.log(this);
-    
-    return (
 
+    return (
+      // <MyProvider>
       <Router>
         <div>
-          <Nav signUp={this.signUp} logIn={this.logIn} isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
+          <Nav
+            signUp={this.signUp}
+            auth={this.state.auth}
+            logIn={this.logIn}
+            isLoggedIn={this.state.isLoggedIn}
+            username={this.state.username}
+            logOut={this.logOut}
+            logInModalTrigger={this.logInModalTrigger}
+          />
+
+          <LogIn
+            logInModalOpen={this.state.logInModalOpen}
+            logInModalTrigger={this.logInModalTrigger}
+            auth={this.state.auth}
+          />
+
+
+
 
           <Switch>
-            <Route exact path="/" render={()=> <Items signUp={this.signUp} />}/>
+            <Route exact path="/" render={() => <Items signUp={this.signUp} />} />
             <Route exact path="/Listing" component={Listing} />
-            <Route exact path="/User" component={Detail} />
+            <Route exact path="/Detail" component={Detail} />
             <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
+      // </MyProvider>
     )
   }
 
