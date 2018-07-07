@@ -83,10 +83,10 @@ logIn = (inputEmail, inputPassword) => {
           <Nav signUp={this.signUp} logIn={this.logIn} isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
 
           <Switch>
-          <Route exact path="/" render={()=> <Items signUp={this.signUp} />}/>
-        <Route exact path="/Listing" component={Listing} />
-        <Route exact path="/Detail" component={Detail} />
-        <Route component={NoMatch} />
+            <Route exact path="/" render={()=> <Items signUp={this.signUp} />}/>
+            <Route exact path="/Listing" component={Listing} />
+            <Route exact path="/Detail" component={Detail} />
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
