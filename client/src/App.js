@@ -22,7 +22,7 @@ class App extends Component {
       isLoggedIn: false,
       username: null,
       logInModalOpen: false,
-      authUser: null
+      auth: null
     };
 
   }
@@ -38,17 +38,22 @@ class App extends Component {
 
   componentDidMount() {
     firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ?
-          // () => {
-            // console.log('you are logged in');
-            this.setState(() => ({ authUser }))
-          // }
-        : 
-        // () => {
-          // console.log('you are not logged in');
-          this.setState(() => ({ authUser: null }));
-        // }
+
+      if (authUser) {
+
+        // console.log('you are logged in');
+        this.setState(() => ({ auth: authUser }))
+        console.log('app.js logged in');
+
+
+      } else {
+
+        console.log('app.js you are not logged in');
+        this.setState(() => ({ auth: null }));
+
+
+      }
+
     });
   }
 
@@ -59,8 +64,9 @@ class App extends Component {
       // <MyProvider>
       <Router>
         <div>
-          <Nav 
+          <Nav
             signUp={this.signUp}
+            auth={this.state.auth}
             logIn={this.logIn}
             isLoggedIn={this.state.isLoggedIn}
             username={this.state.username}
@@ -69,9 +75,10 @@ class App extends Component {
           />
 
           {/* Ideally I would have my loginnav component here and just send the triggers to where they need to go. */}
-          <LogIn 
+          <LogIn
             logInModalOpen={this.state.logInModalOpen}
             logInModalTrigger={this.logInModalTrigger}
+            auth={this.state.auth}
           />
 
 

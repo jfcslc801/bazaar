@@ -75,8 +75,37 @@ class LogIn extends Component {
     .catch(e => {
       console.log(e.message)
       console.log('you didnt sign in');
-
     });
+
+  }
+
+  tFunction = () => {
+    console.log(this.props.auth);
+    console.log('tfunction');
+    const { classes } = this.props;
+
+    if (this.props.auth) {
+      return (
+
+        <div style={getModalStyle()} className={classes.paper}>
+        <h3>Hello {this.props.auth.email}</h3>
+        <Button onClick={auth.doSignOut} waves='light'>Log Out</Button>
+        </div>
+
+      )
+    } else {
+      return (
+
+        <div style={getModalStyle()} className={classes.paper}>
+        <h3>Log In:</h3>
+        <Input s={12} name="email" label="Email" validate value={this.state.email} onChange={this.handleChange}><Icon>account_circle</Icon></Input>
+        <Input s={12} name="password" label="Password" validate value={this.state.password} onChange={this.handleChange} type='password'><Icon>lock</Icon></Input>
+        <Button onClick={this.signUp} waves='light'>Sign Up</Button>
+        <Button onClick={this.logIn} waves='light'>Log In</Button>
+
+        </div>
+      )
+    }
 
   }
 
@@ -93,15 +122,15 @@ class LogIn extends Component {
           header='Log In'
           >
           <div>
+
+
             <Row>
-            <div style={getModalStyle()} className={classes.paper}>
-              <h3>Log In:</h3>
-              <Input s={12} name="email" label="Email" validate value={this.state.email} onChange={this.handleChange}><Icon>account_circle</Icon></Input>
-              <Input s={12} name="password" label="Password" validate value={this.state.password} onChange={this.handleChange} type='password'><Icon>lock</Icon></Input>
-              <Button onClick={this.signUp} waves='light'>Sign Up</Button>
-              <Button onClick={this.logIn} waves='light'>Log In</Button>
-              <Button onClick={auth.doSignOut} waves='light'>Log Out</Button>
-              </div>
+            
+
+            {/* user logged in Logic */}
+            {this.tFunction()}
+
+              
             </Row>
           </div>
         </Modal>
