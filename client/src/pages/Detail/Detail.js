@@ -9,6 +9,7 @@ import DeleteBtn from "../../components/DeleteBtn";
 import DataPanel from "../../components/DataPanel";
 import CustomCardPanel from "../../components/CardPanel";
 import ItemCard from "../../components/ItemCard";
+import ItemListing from "../../components/ItemListing";
 import CustomTable from "../../components/Table";
 import { List, ListItem } from "../../components/List";
 import "./Detail.css";
@@ -58,7 +59,7 @@ class Detail extends Component {
           <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
             {/*                     <h1> Listed Items </h1> */}
             {this.state.listedItems.map(listed => (
-              <CustomCardPanel s={1} className='grid-example'
+              <ItemListing s={1} className='grid-example'
                 removeListed={this.removeListed}
                 id={listed._id}
                 key={listed._id}
