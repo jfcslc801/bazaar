@@ -33,7 +33,6 @@ class Listing extends Component {
   handleFormSubmit = event => {
 
     event.preventDefault();
-    // window.location.reload();
 
     document.getElementById('submitButton').innerHTML = `Your listing is uploading, please wait. <img id='loadImage' src='https://i.gifer.com/ZKZg.gif'></img>`;
     API.saveItem({
