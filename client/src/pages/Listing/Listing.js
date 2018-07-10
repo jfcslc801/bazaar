@@ -6,6 +6,7 @@ import API from "../../utils/API";
 // import { Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
 import { TextArea, FormBtn } from "../../components/Form";
+import ReactDOM from "react-dom";
 import { Row, Input, Card, Col, CardTitle, Button, Icon } from 'react-materialize';
 import "./Listing.css";
 
@@ -30,20 +31,34 @@ class Listing extends Component {
   };
 
   handleFormSubmit = event => {
+
     event.preventDefault();
+
+    document.getElementById('submitButton').innerHTML = `Your listing is uploading, please wait. <img id='loadImage' src='https://i.gifer.com/ZKZg.gif'></img>`;
     API.saveItem({
       itemName: this.state.itemName,
-      userID: this.state.userID,
+      userID: this.props.auth.email,
       listed_price: this.state.listed_price,
       description: this.state.description,
       location: this.state.location,
       image_url: this.state.image_url
     })
-      .then(res => console.log("success"))
-      .catch(err => console.log(err));
+      .then(res => ReactDOM.render(<div>Your listing has been uploaded! <Icon small>check</Icon></div>, document.getElementById('submitButton')))
+      .catch(err => window.location.reload());
 
 
   };
+
+  welcomeMessage = () => {
+    if (this.props.auth) {
+      return <div>
+        <h3>Welcome {this.props.auth.email}</h3>
+        <h5> Create your Listing!</h5>
+      </div>
+    }
+
+    return <h3>'Please log in before listing an item'</h3>
+  }
 
   render() {
 
@@ -54,9 +69,9 @@ class Listing extends Component {
 
       <div className="container">
         <DataPanel>
-        <h3>Welcome: Listings!
-        </h3>
-          
+          {/* Logic to prompt user to log in if not logged in */}
+          {this.welcomeMessage()}
+
         </DataPanel>
         <DataPanel>
           <Row>
@@ -64,12 +79,6 @@ class Listing extends Component {
               value={this.state.itemName}
               onChange={this.handleInputChange}
               name="itemName"
-              validate
-            />
-            <Input label="userID" s={6}
-              value={this.state.userID}
-              onChange={this.handleInputChange}
-              name="userID"
               validate
             />
             <Input label="Listing Price" s={6}
@@ -96,11 +105,13 @@ class Listing extends Component {
               name="image_url"
               validate
             />
-            <FormBtn
-              disabled={!(this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.image_url)}
-              onClick={this.handleFormSubmit}
-            > Submit
+            <div id='submitButton'>
+              <FormBtn
+                disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.image_url)}
+                onClick={this.handleFormSubmit}
+              > Submit
           </FormBtn>
+            </div>
           </Row>
         </DataPanel>
 
