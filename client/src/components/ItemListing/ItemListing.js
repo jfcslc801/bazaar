@@ -1,6 +1,38 @@
 import React from "react";
 import "./ItemListing.css";
-import { Card, CardTitle, Row, Col, CardPanel } from 'react-materialize';
+import { Card, CardTitle, Row, Col, CardPanel, Button } from 'react-materialize';
+import CustomModal from "./../../components/Modal";
+import { List, ListItem, Table1, TableItem } from './../../components/BarterWindow';
+
+
+let dbOffer = [{
+  id: 1,
+  date: "09/09/09",
+  offer: "iPhone SE 64GB",
+  itemDetails: "It is a great condition phone, AT&T Network",
+  user: "Izzlenizzle"
+},
+{
+  id: 2,
+  date: "09/09/09",
+  offer: "iPhone SE 64GB",
+  itemDetails: "It is a great condition phone, AT&T Network",
+  user: "Izzlenizzle"
+},
+{
+  id: 3,
+  date: "09/09/09",
+  offer: "iPhone SE 64GB",
+  itemDetails: "It is a great condition phone, AT&T Network",
+  user: "Izzlenizzle"
+},
+{
+  id: 4,
+  date: "09/09/09",
+  offer: "iPhone SE 64GB",
+  itemDetails: "It is a great condition phone, AT&T Network",
+  user: "Izzlenizzle"
+}]
 
 
 const ItemListing = (props) => (
@@ -12,19 +44,46 @@ const ItemListing = (props) => (
         <Card header={<CardTitle reveal waves='light' />}
 
           title={props.name}
-          reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
+          reveal={
+
+            <div>
+
+            </div >
+
+          }>
           <img className="imgSize"
             alt={props.name}
             src={props.image}
           />
-          <p><a href="#">This is a link</a></p>
-          <span onClick={(event) => props.removeListed(event, props.id)} className="remove">
-            𝘅
-        </span>
+          <p>{props.value}</p>
+          <p>{props.location}</p>
+          <p>{props.userId}</p>
+          <CustomModal>
+            <Table1>
+              {dbOffer.map(offer => (
+                <TableItem
+                  key={offer.id}
+                  user={offer.user}
+                  date={offer.date}
+                  offer={offer.offer}
+
+                />
+              ))}
+            </Table1>
+
+
+
+          </CustomModal>
+
+          <Button style={{ bottom: '-15px', right: '15px' }} floating tiny className='red' waves='green' icon='delete' onClick={(event) => props.removeListed(event, props.id)}/>
+          <Button style={{ bottom: '-15px', right: '10px' }} floating right tiny className='yellow' waves='light' icon='favorite' onClick={(event) => props.removeListed(event, props.id)} />
+          
         </Card>
         {/* </CardPanel> */}
       </Col>
     </Row>
+
+
 
 
   </div>

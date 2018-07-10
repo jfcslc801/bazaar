@@ -147,11 +147,13 @@ class Detail extends Component {
                 value={listed.listed_price}
                 location={listed.location}
               />
+
+
             ))} */}
           {/* </div> */}
+
         </DataPanel>
       </div>
-
     );
   }
 }
