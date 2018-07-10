@@ -4,19 +4,18 @@ const db = require("../models");
 module.exports = {
   findAll: function (req, res) {
 	db.Offer
-	    .find(req.query)
-	    .sort({ date: -1 })
+	  .find(req.query)
+	  .sort({ date: -1 })
 		.then(dbModel => res.json(dbModel))
 		.catch(err => res.status(422).json(err));
 	},
-  findById: function(req, res) {
+  findByItemId: function(req, res) {
     db.Offer
-      .findById(req.params.id)
+      .find({itemID: req.params.itemID})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-		console.log(req.body);
     db.Offer
       .create(req.body)
       .then(dbModel => res.json(dbModel))
