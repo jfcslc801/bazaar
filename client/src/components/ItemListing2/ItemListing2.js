@@ -1,5 +1,5 @@
 import React from "react";
-import "./ItemListing.css";
+import "./ItemListing2.css";
 import { Card, CardTitle, Row, Col, CardPanel, Button } from 'react-materialize';
 import CustomModal from "./../../components/Modal";
 import { List, ListItem, Table1, TableItem } from './../../components/BarterWindow';
@@ -35,7 +35,7 @@ let dbOffer = [{
 }]
 
 
-const ItemListing = (props) => (
+const ItemListing2 = (props) => (
   <div >
     <Row>
       <Col s={12} m={12}>
@@ -47,22 +47,10 @@ const ItemListing = (props) => (
           reveal={
 
             <div>
-              <CustomModal>
-                <Table1>
-                  {dbOffer.map(offer => (
-                    <TableItem
-                      key={offer.id}
-                      user={offer.user}
-                      date={offer.date}
-                      offer={offer.offer}
-
-                    />
-                  ))}
-                </Table1>
-
-
-
-              </CustomModal>
+              <p>{props.name}</p>
+              <p>{props.value}</p>
+              <p>{props.location}</p>
+              <p>{props.userId}</p>
             </div >
 
           }>
@@ -74,11 +62,11 @@ const ItemListing = (props) => (
           <p>{props.location}</p>
           <p>{props.userId}</p>
 
-
-          <Button style={{ bottom: '-15px', right: '15px' }} floating large className='red' waves='light' icon='delete' onClick={(event) => props.removeListed(event, props.id)} />
-          {/* <Button style={{ bottom: '-15px', right: '10px' }} floating right tiny className='yellow' waves='light' icon='favorite' onClick={(event) => props.removeListed(event, props.id)} /> */}
-
+          {/* <Button style={{ bottom: '-15px', right: '15px' }} floating tiny className='red' waves='green' icon='delete' onClick={(event) => props.removeListed(event, props.id)}/> */}
+          {/* <Button onClick={() => this.deleteBook(listed._id)}  /> */}
+          <Button style={{ bottom: '-15px', right: '10px' }} floating  large className='purple' waves='light' icon='add' onClick={(event) => props.saveItem(event, props.id)} />
         </Card>
+        {/* </CardPanel> */}
       </Col>
     </Row>
 
@@ -88,5 +76,5 @@ const ItemListing = (props) => (
   </div>
 );
 
-export default ItemListing;
+export default ItemListing2;
 

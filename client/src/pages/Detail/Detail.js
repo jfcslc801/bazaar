@@ -120,7 +120,7 @@ class Detail extends Component {
 <h5>Your Listings: {this.state.listedItems.length}</h5>
 
  {this.state.listedItems.length > 0 && 
-            <div>
+            <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
               {this.state.listedItems.map(listed => (
                       <ItemListing s={1} className='grid-example'
                         removeListed={this.removeListed}
@@ -136,21 +136,6 @@ class Detail extends Component {
               
             </div>}
 
-          {/* {this.state.listedItems.map(listed => (
-              <ItemListing s={1} className='grid-example'
-                removeListed={this.removeListed}
-                id={listed._id}
-                key={listed._id}
-                name={listed.itemName}
-                image={listed.image_url}
-                user={listed.userID}
-                value={listed.listed_price}
-                location={listed.location}
-              />
-
-
-            ))} */}
-          {/* </div> */}
 
         </DataPanel>
       </div>
