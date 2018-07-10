@@ -13,6 +13,7 @@ export default {
   // Gets the item with the given userId
   getUserItems: function (user) {
     return axios.get("/api/items/userListings/" + user);
+
   },
   // Deletes the item with the given id
   deleteItem: function (id) {
