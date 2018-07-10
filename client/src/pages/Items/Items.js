@@ -3,10 +3,10 @@ import API from "../../utils/API";
 // import listedItems from "./../../../src/listed.json";
 import ItemCard from "./../../components/ItemCard";
 // import { Container } from './../../components/Grid/Container';
-import { Navbar, NavItem, Icon, Container } from 'react-materialize';
+import { Navbar, NavItem, Icon, Container, Button } from 'react-materialize';
 import "./Items.css";
 import DataPanel from '../../components/DataPanel';
-import CustomCardPanel from '../../components/CardPanel';
+import ItemListing2 from '../../components/ItemListing2';
 
 class Items extends Component {
 
@@ -37,6 +37,35 @@ removeListed = (event, _id) => {
   API.deleteItem(_id);
 
 };
+
+
+
+// saveListed = event => {
+//   event.preventDefault();
+//   if (this.state.id && this.state.itemName && this.state.image_url) {
+//     API.saveItem({
+//       id: this.state.id,
+//       author: this.state.itemName,
+//       image_url: this.state.image_url 
+//     })
+//       .then(res => this.loadItems(res.itemData))
+//       .catch(err => console.log(err));
+//   }
+// };
+
+saveItem = event => {
+  event.preventDefault();
+  API.saveItem({   
+    itemName: this.state.itemName,
+    userID: this.props.auth.email,
+    listed_price: this.state.listed_price,
+    description: this.state.description,
+    location: this.state.location,
+    image_url: this.state.image_url})
+  
+    .then(res => this.loadItems())
+    .catch(err => console.log(err));
+};
     render() {
         return (
 	
@@ -46,11 +75,10 @@ removeListed = (event, _id) => {
         </h4>
         </DataPanel>
         <DataPanel >
-          <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
-           
-                    {this.state.listedItems.map(listed => (
-                        <CustomCardPanel s={1} className='grid-example'
-                                    removeListed={this.removeListed}
+          <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>          
+                {this.state.listedItems.map(listed => (
+                <ItemListing2 s={1} className='grid-example'
+                saveItem={this.saveItem}
                 id={listed._id}
                 key={listed._id}
                 name={listed.itemName}
@@ -61,8 +89,11 @@ removeListed = (event, _id) => {
                         />
                     ))}
 
+
             </div>
+            
                 </DataPanel >
+
             </div>
         );
     }
