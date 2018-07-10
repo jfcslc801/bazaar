@@ -11,7 +11,7 @@ module.exports = {
   },
   userListings: function (req, res) {
     db.Item
-      .find({id: req.params.id})
+      .find({userID: req.params.userID})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
