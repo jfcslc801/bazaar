@@ -7,10 +7,10 @@ router.route("/")
   .post(itemsController.create);
 
 // Matches with "/api/items/:id"
-// router.route("/:id")
-//   .get(itemsController.findById)
-//   .put(itemsController.update)
-//   .delete(itemsController.remove);
+router.route("/:id")
+  .get(itemsController.findById)
+  .put(itemsController.update)
+  .delete(itemsController.remove);
 
   // Matches with "/api/items/userListings/:userID"
 

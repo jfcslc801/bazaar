@@ -11,10 +11,17 @@ module.exports = {
   },
   userListings: function (req, res) {
     db.Item
-      .find({userID: req.params.userID})
+      .find({id: req.params.id})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  findById: function (req, res) {
+    db.Item
+    .findByID(req.params.id)
+    .sort({ date: -1})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   },
   deleteUserListings: function (req, res) {
     db.Item
