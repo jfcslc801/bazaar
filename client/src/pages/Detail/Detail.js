@@ -71,9 +71,9 @@ class Detail extends Component {
               />
             ))}
           </div>
+
         </DataPanel>
       </div>
-
     );
   }
 }
