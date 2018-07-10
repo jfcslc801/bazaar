@@ -20,12 +20,9 @@ module.exports = {
   },
   deleteUserListings: function (req, res) {
     db.Item
-    .findById({ _id: req.params.id })
+    .findById({ userID: req.params.userID })
     .then(dbModel => dbModel.remove())
-    .then(dbModel => {
-      
-      res.json(dbModel)
-    })
+    .then(dbModel => {res.json(dbModel)})
     .catch(err => res.status(422).json(err));
   },
   findByTitle: function(req, res) {
