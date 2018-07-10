@@ -18,14 +18,7 @@ router.route("/userListings/:userID")
   .get(itemsController.userListings)
   .delete(itemsController.deleteUserListings);
 
-  // Matches with "api/items/userListings/titleName"
-
-router.route("/titleListings/:titleName")
-  .get(itemsController.titleListings)
-  .delete(itemsController.deleteTitleListings);
-
-  router.route("/create/:listedItem")
-  .post(itemsController.create)
-  .delete(itemsController.deleteTitleListings);
+// create posted item
+ 
 
 module.exports = router;

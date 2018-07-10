@@ -4,12 +4,9 @@ import { firebase } from './firebase';
 import Items from "./pages/Items";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import CustomModal from "./components/Modal";
 import LogIn from "./components/LogInModal";
 import Listing from "./pages/Listing";
 import Detail from "./pages/Detail";
-import DeleteBtn from './components/DeleteBtn';
-import SimpleModal from './components/MaterialModal';
 
 
 
@@ -63,12 +60,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav
-            signUp={this.signUp}
             auth={this.state.auth}
-            logIn={this.logIn}
-            isLoggedIn={this.state.isLoggedIn}
-            username={this.state.username}
-            logOut={this.logOut}
             logInModalTrigger={this.logInModalTrigger}
           />
 
@@ -82,9 +74,13 @@ class App extends Component {
 
 
           <Switch>
-            <Route exact path="/" render={() => <Items signUp={this.signUp} />} />
-            <Route exact path="/Listing" component={Listing} />
-            <Route exact path="/Detail" component={Detail} />
+            <Route exact path="/"  component={Items} />
+
+            {/* Sending auth as a prop to the details page */}
+            <Route exact path="/Listing"render={() => <Listing auth={this.state.auth} />} />
+
+            {/* Sending auth as a prop to the details page */}
+            <Route exact path="/Detail" render={() => <Detail auth={this.state.auth} />} />
             <Route component={NoMatch} />
           </Switch>
         </div>

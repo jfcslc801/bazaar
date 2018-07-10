@@ -16,36 +16,23 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  titleListings: function (req, res) {
-    console.log("you're in", req)
+  findById: function (req, res) {
     db.Item
-      .find({itemName: req.params.itemName})
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    .findByID(req.params.id)
+    .sort({ date: -1})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   },
   deleteUserListings: function (req, res) {
     db.Item
     .findById({ userID: req.params.userID })
     .then(dbModel => dbModel.remove())
-    .then(dbModel => {
-      
-      res.json(dbModel)
-    })
+    .then(dbModel => {res.json(dbModel)})
     .catch(err => res.status(422).json(err));
   },
-  deleteTitleListings: function (req, res) {
+  findByTitle: function(req, res) {
     db.Item
-    .findById({ itemName: req.params.itemName })
-    .then(dbModel => dbModel.remove())
-    .then(dbModel => {
-      
-      res.json(dbModel)
-    })
-    .catch(err => res.status(422).json(err));
-  },
-  findById: function(req, res) {
-    db.Item
-      .findById(req.params.itemName)
+      .find({itemName: req.params.itemName})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

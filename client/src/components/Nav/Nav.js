@@ -49,7 +49,12 @@ class Nav extends Component {
     return (
       <div>
 
-        <Navbar brand='Bazaar' right>
+
+
+        <Navbar brand={<img src="../assets/Bazaarlogo.png" height="60"/>} right>
+        
+            
+
 
 
 
