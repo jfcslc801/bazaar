@@ -10,6 +10,10 @@ export default {
   getItem: function(id) {
     return axios.get("/api/items/" + id);
   },
+  // Gets the item by userNamey
+  getItemByUser: function (userListings) {
+    return axios.get("/userListings/"+ userListings)
+  },
   // Deletes the item with the given id
   deleteItem: function(id) {
     return axios.delete("/api/items/" + id);

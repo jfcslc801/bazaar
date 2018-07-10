@@ -20,8 +20,8 @@ router.route("/userListings/:userID")
 
   // Matches with "api/items/userListings/titleName"
 
-router.route("/titleListings/:titleName")
-  .get(itemsController.titleListings)
+router.route("/title/:titleName")
+  .get(itemsController.findByTitle)
   .delete(itemsController.deleteTitleListings);
 
   router.route("/create/:listedItem")
