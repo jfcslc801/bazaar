@@ -34,7 +34,7 @@ class Nav extends Component {
               this.props.logInModalTrigger()
             }
           }>
-          <i class="large material-icons">
+          <i class="x-large material-icons">
             account_circle
           </i>
         </NavItem>
@@ -51,7 +51,7 @@ class Nav extends Component {
 
 
         <div class="navbar-fixed">
-          <Navbar brand={<img src="../assets/Bazaarlogo.png" height="60" />} right class="transparent z-depth-0">
+          <Navbar brand={<img src="../assets/bzr.png" height="80" />} right class="transparent z-depth-0">
 
 
 
@@ -78,10 +78,10 @@ class Nav extends Component {
           </Navbar>
         </div>
 
-        <Button floating fab='vertical' icon='mode_edit' className='red' faicon='fa fa-plus' className='blue' large style={{ bottom: '45px', right: '24px' }}>
-          <Button floating icon='home' className='blue' node='a' href='/' />
-          <Button floating icon='listing' className='green darken-1' node='a' href='/Listing' />
-          <Button floating icon='publish' className='green blue' node='a' href='/Detail' />
+        <Button floating icon='menu' large className='black' fab='vertical' large style={{ bottom: '45px', right: '24px' }}>
+          <Button floating icon='home' large className='black' node='a' href='/' />
+          <Button floating icon='list' large className='black' node='a' href='/Listing' />
+          <Button floating icon='perm_identity' large className='black' node='a' href='/Detail' />
         </Button>
       </div>
 

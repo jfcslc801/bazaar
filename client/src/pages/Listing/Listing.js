@@ -75,42 +75,42 @@ class Listing extends Component {
         </DataPanel>
         <DataPanel>
           <Row>
-            <Input label="Item Name" s={6}
+            <Input label="Item Name" s={6} style={{color: "white"}}
               value={this.state.itemName}
               onChange={this.handleInputChange}
               name="itemName"
               validate
             />
-            <Input label="Listing Price" s={6}
+            <Input label="Listing Price" s={6} style={{color: "white"}}
               value={this.state.listed_price}
               onChange={this.handleInputChange}
               name="listed_price"
               type="number"
               validate
             />
-            <Input label="Description" s={6}
+            <Input label="Description" s={6} style={{color: "white"}}
               value={this.state.description}
               onChange={this.handleInputChange}
               name="description"
             />
-            <Input label="Location" s={6}
+            <Input label="Location" s={6} style={{color: "white"}}
               value={this.state.location}
               onChange={this.handleInputChange}
               name="location"
               validate
             />
-            <Input label="Image" s={6}
+            <Input label="Image" s={6} style={{color: "white"}}
               value={this.state.image_url}
               onChange={this.handleInputChange}
               name="image_url"
               validate
             />
-            <div id='submitButton'>
-              <FormBtn
+            <div id='submitButton' style={{color: "white"}}>
+              <Button style={{background: "white"}} Button floating large className='black' waves='light' icon='check'
                 disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.image_url)}
                 onClick={this.handleFormSubmit}
               > Submit
-          </FormBtn>
+          </Button>
             </div>
           </Row>
         </DataPanel>
