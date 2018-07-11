@@ -50,32 +50,33 @@ class Nav extends Component {
       <div>
 
 
-
-        <Navbar brand={<img src="../assets/Bazaarlogo.png" height="60"/>} right>
-        
-            
+        <div class="navbar-fixed">
+          <Navbar brand={<img src="../assets/Bazaarlogo.png" height="60" />} right class="transparent z-depth-0">
 
 
 
 
-          {/* user logged in Logic */}
-          {this.tFunction()}
 
-          <NavItem href='get-started.html'>
-            {this.props.username}
-          </NavItem>
 
-          <NavItem onClick={() => {
-            // event.preventDefault();
-            // $('#log-in').modal('open')
-          }}
-          >
-            <Icon>search</Icon>
+            {/* user logged in Logic */}
+            {this.tFunction()}
 
-          </NavItem>
+            <NavItem href='get-started.html'>
+              {this.props.username}
+            </NavItem>
 
-          <NavItem href='get-started.html'><i class="large material-icons">location_on</i></NavItem>
-        </Navbar>
+            <NavItem onClick={() => {
+              // event.preventDefault();
+              // $('#log-in').modal('open')
+            }}
+            >
+              <Icon>search</Icon>
+
+            </NavItem>
+
+            <NavItem href='get-started.html'><i class="large material-icons">location_on</i></NavItem>
+          </Navbar>
+        </div>
 
         <Button floating fab='vertical' icon='mode_edit' className='red' faicon='fa fa-plus' className='blue' large style={{ bottom: '45px', right: '24px' }}>
           <Button floating icon='home' className='blue' node='a' href='/' />

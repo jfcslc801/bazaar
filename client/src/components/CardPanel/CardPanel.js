@@ -38,23 +38,13 @@ const CustomCardPanel = (props) => (
   <div>
     <Row>
       <Col s={12} m={12}>
-        <CardPanel className="red black-text cardPanelCenter">
+        <CardPanel className=" black-text cardPanelCenter">
           <img className="imgSize"
             alt={props.name}
             src={props.image}
           />
 
           <CustomModal>
-            {/* <List>
-						<ListItem
-							date={dbOffer.date}
-							offer={dbOffer.offer}
-							itemDetails={dbOffer.itemDetails}
-							user={dbOffer.user}
-						>
-						</ListItem>
-					</List> */}
-
             <Table1>
               {dbOffer.map(offer => (
                 <TableItem

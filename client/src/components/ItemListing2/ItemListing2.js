@@ -41,7 +41,7 @@ const ItemListing2 = (props) => (
       <Col s={12} m={12}>
         {/* <CardPanel className="red black-text cardPanelCenter" > */}
 
-        <Card header={<CardTitle reveal waves='light' />}
+        <Card header={<CardTitle reveal />}
 
           title={props.name}
           reveal={
@@ -61,7 +61,7 @@ const ItemListing2 = (props) => (
           <p>{props.value}</p>
           <p>{props.location}</p>
           <p>{props.userId}</p>
-
+          <Button style={{ bottom: '-15px', right: '15px' }} floating large className='red' waves='light' icon='delete' onClick={(event) => props.removeListed(event, props.id)} />
           {/* <Button style={{ bottom: '-15px', right: '15px' }} floating tiny className='red' waves='green' icon='delete' onClick={(event) => props.removeListed(event, props.id)}/> */}
           {/* <Button onClick={() => this.deleteBook(listed._id)}  /> */}
           <Button style={{ bottom: '-15px', right: '10px' }} floating  large className='purple' waves='light' icon='add' onClick={(event) => props.saveItem(event, props.id)} />
