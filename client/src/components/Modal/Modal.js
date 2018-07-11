@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import { Modal, Button } from 'react-materialize';
+import PropTypes from 'prop-types';
+
 
 const styles = {
   fontFamily: "sans-serif",
@@ -10,6 +12,7 @@ class CustomModal extends React.Component {
   state = {
     open: false
   };
+
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -25,7 +28,7 @@ class CustomModal extends React.Component {
       <div style={styles}>
         <Modal
           header='Modal Header'
-          trigger={<Button className="">Modal</Button>}>
+          trigger={<Button style={{ bottom: '-15px', right: '15px' }} floating tiny className='red' waves='green' icon='delete'></Button>}>
           <div>
             {this.props.children}
           </div>

@@ -6,7 +6,7 @@ export const Table1 = ({ children }) => {
   return (
 
         <Row>
-          <h4>Current Offers{children && (`: ${children.length}`)}</h4>
+          <h6>Current Offers{children && (`: ${children.length}`)}</h6>
           <Table className='offer-table'>
 
             <thead>
@@ -27,7 +27,7 @@ export const Table1 = ({ children }) => {
 
           </Table>
           <hr />
-          <h4>Make an Offer</h4>
+          <h6>Make an Offer</h6>
           <Input className='offer' s={12} label="New Offer" />
         </Row>
 

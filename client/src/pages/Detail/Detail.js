@@ -5,77 +5,142 @@ import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import { Input, Card, CardTitle, Button, Icon } from 'react-materialize';
 import DeleteBtn from "../../components/DeleteBtn";
-import CustomCardPanel from "../../components/CardPanel";
+// import CustomCardPanel from "../../components/CardPanel";
 import DataPanel from "../../components/DataPanel";
+import CustomCardPanel from "../../components/CardPanel";
+import ItemCard from "../../components/ItemCard";
+import ItemListing from "../../components/ItemListing";
 import CustomTable from "../../components/Table";
 import { List, ListItem } from "../../components/List";
 import "./Detail.css";
+// const uuidv1 = require('uuid/v1');
+// uuidv1();
 
 
 
-class Listing extends Component {
-  state = {
-
-    item: {}
-  };
-  // When this component mounts, grab the item with the _id of this.props.match.params.id
-  // e.g. localhost:3000/items/599dcb67f0f16317844583fc
-  componentDidMount() {
-    API.getItem(this.props.match.params.id)
-      .then(res => this.setState({ item: res.data }))
-      .catch(err => console.log(err));
-
+class Detail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      didCheckDB: 0,
+      listedItems: []
+    };
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  componentDidUpdate() {
+    // This Checks for User and if State has already been updated.
+    if (this.props.auth && this.state.didCheckDB === 0) {
+      this.loadItems(this.props.auth.email);
+      }
+    // This will clear state if the user logs out
+    if (!this.props.auth && this.state.didCheckDB === 1) {
+      this.clearState();
+    }
+  }
+
+  // componentDidMount() {
+  //   if (this.props.auth) {
+
+  //     console.log('user did load');
+      
+  //   this.loadItems(this.props.auth.email);
+  //   }
+  // }
+
+  loadItems = user => {
+    console.log("Before Calling API");
+    this.setState({ didCheckDB: 1 }, () => {
+      API.getUserItems(user)
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ listedItems: res.data })
       )
       .catch(err => console.log(err));
+    })
+    
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
-
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit = event => {
+  removeListed = (event, _id) => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-    }
+    console.log(event);
+    // // Filter this.state.friends for friends with an id not equal to the id being removed
+    const listedItems = this.state.listedItems.filter(listed => listed._id !== _id);
+    // // Set this.state.friends equal to the new friends array
+    this.setState({ listedItems });
+    API.deleteItem(_id);
+
   };
+
+  returnAuth = property => {
+    if (this.props.auth) {
+
+          return <h4>Welcome {this.props.auth[property]}</h4>
+
+
+    } else {
+      return <h4>"You are not logged in"</h4>
+    }
+  }
+
+  getData = user => {
+    API.getUserItems(user)
+    .then(res =>
+      this.setState({ listedItems: res.data })
+    ).catch(err => console.log(err));
+    
+  }
+
+  clearState = () => {
+    this.setState({ 
+      listedItems: [],
+      didCheckDB: 0
+     })
+  }
 
   render() {
+    console.log(this);
+    console.log("detail.js");
+
     return (
 
-
       <div className="container">
-        <CustomCardPanel>
-
-        </CustomCardPanel>
+        {/* This function will map out the Users listings if a user is logged in */}
         <DataPanel>
+        {this.returnAuth("email")}
+        </DataPanel>
+
+
+
+         
+
+        <DataPanel>
+          {/* <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}> */}
+          {/* This function will map out the Users listings if a user is logged in */}
+          {/* {this.returnAuth()} */}
+
+<h5>Your Listings: {this.state.listedItems.length}</h5>
+
+ {this.state.listedItems.length > 0 && 
+            <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
+              {this.state.listedItems.map(listed => (
+                      <ItemListing s={1} className='grid-example'
+                        removeListed={this.removeListed}
+                        id={listed._id}
+                        key={listed._id}
+                        name={listed.itemName}
+                        image={listed.image_url}
+                        user={listed.userID}
+                        value={listed.listed_price}
+                        location={listed.location}
+                      />
+                    ))} 
+              
+            </div>}
+
 
         </DataPanel>
       </div>
-
     );
   }
 }
 
-export default Listing;
+export default Detail;

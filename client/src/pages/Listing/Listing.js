@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
-import Jumbotron from "../../components/Jumbotron";
+// import DeleteBtn from "../../components/DeleteBtn";
+import DataPanel from "../../components/DataPanel";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
-import { Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
+// import { Link } from "react-router-dom";
+// import { Container } from "../../components/Grid";
+// import { List, ListItem } from "../../components/List";
 import { TextArea, FormBtn } from "../../components/Form";
+import ReactDOM from "react-dom";
 import { Row, Input, Card, Col, CardTitle, Button, Icon } from 'react-materialize';
 import "./Listing.css";
 
@@ -20,23 +21,7 @@ class Listing extends Component {
     image_url: ""
   };
 
-  // componentDidMount() {
-  //   this.loadBooks();
-  // }
 
-  // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -46,23 +31,34 @@ class Listing extends Component {
   };
 
   handleFormSubmit = event => {
+
     event.preventDefault();
-    // if (this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.location && this.state.date && this.state.image_url) {
-      API.saveItem({
-        itemName: this.state.itemName,
-        userID: this.state.userID,
-        listed_price: this.state.listed_price,
-        description: this.state.description,
-        location: this.state.location,
-        // date: this.state.date,
-        image_url: this.state.image_url
-      })
-        .then(res => console.log("success"))
-        .catch(err => console.log(err));
-    // }
-    
+
+    document.getElementById('submitButton').innerHTML = `Your listing is uploading, please wait. <img id='loadImage' src='https://i.gifer.com/ZKZg.gif'></img>`;
+    API.saveItem({
+      itemName: this.state.itemName,
+      userID: this.props.auth.email,
+      listed_price: this.state.listed_price,
+      description: this.state.description,
+      location: this.state.location,
+      image_url: this.state.image_url
+    })
+      .then(res => ReactDOM.render(<div>Your listing has been uploaded! <Icon small>check</Icon></div>, document.getElementById('submitButton')))
+      .catch(err => window.location.reload());
+
 
   };
+
+  welcomeMessage = () => {
+    if (this.props.auth) {
+      return <div>
+        <h3>Welcome {this.props.auth.email}</h3>
+        <h5> Create your Listing!</h5>
+      </div>
+    }
+
+    return <h3>'Please log in before listing an item'</h3>
+  }
 
   render() {
 
@@ -70,58 +66,54 @@ class Listing extends Component {
     return (
 
 
-      <div className="contDiv">
 
-        <Card className='listing  grey  lighten-1 black-text' textColor='red' title='Barter Up!'>
-          <TextArea
-            value={this.state.itemName}
-            onChange={this.handleInputChange}
-            name="itemName"
-            placeholder="Item (required)"
-          />
-          <TextArea
-            value={this.state.userID}
-            onChange={this.handleInputChange}
-            name="userID"
-            placeholder="User ID (required)"
-          />
-          <TextArea
-            value={this.state.listed_price}
-            onChange={this.handleInputChange}
-            name="listed_price"
-            placeholder="Listed Price (required)"
-          />
-          <TextArea
-            value={this.state.description}
-            onChange={this.handleInputChange}
-            name="description"
-            placeholder="Description (required)"
-          />
-          <TextArea
-            value={this.state.location}
-            onChange={this.handleInputChange}
-            name="location"
-            placeholder="Location (Optional)"
-          />
-          <TextArea
-            value={this.state.date}
-            onChange={this.handleInputChange}
-            name="date"
-            placeholder="Date (Optional)"
-          />
-          <TextArea
-            value={this.state.image_url}
-            onChange={this.handleInputChange}
-            name="image_url"
-            placeholder="Picture (required)"
-          />
-          <FormBtn
-            disabled={!(this.state.itemName && this.state.userID && this.state.listed_price && this.state.description && this.state.image_url)}
-            onClick={this.handleFormSubmit} node='a' href='/' 
-          >
-            Submit
-              </FormBtn>
-        </Card>
+      <div className="container">
+        <DataPanel>
+          {/* Logic to prompt user to log in if not logged in */}
+          {this.welcomeMessage()}
+
+        </DataPanel>
+        <DataPanel>
+          <Row>
+            <Input label="Item Name" s={6}
+              value={this.state.itemName}
+              onChange={this.handleInputChange}
+              name="itemName"
+              validate
+            />
+            <Input label="Listing Price" s={6}
+              value={this.state.listed_price}
+              onChange={this.handleInputChange}
+              name="listed_price"
+              type="number"
+              validate
+            />
+            <Input label="Description" s={6}
+              value={this.state.description}
+              onChange={this.handleInputChange}
+              name="description"
+            />
+            <Input label="Location" s={6}
+              value={this.state.location}
+              onChange={this.handleInputChange}
+              name="location"
+              validate
+            />
+            <Input label="Image" s={6}
+              value={this.state.image_url}
+              onChange={this.handleInputChange}
+              name="image_url"
+              validate
+            />
+            <div id='submitButton'>
+              <FormBtn
+                disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.image_url)}
+                onClick={this.handleFormSubmit}
+              > Submit
+          </FormBtn>
+            </div>
+          </Row>
+        </DataPanel>
 
       </div>
     );

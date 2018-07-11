@@ -16,3 +16,11 @@
 .card > .remove:hover {
   color: #d50000;
 }
+
+p{
+  /* margin: 0px; */
+}
+
+.red{
+  background-color: black;
+}
