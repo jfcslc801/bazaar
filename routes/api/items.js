@@ -18,7 +18,10 @@ router.route("/userListings/:userID")
   .get(itemsController.userListings)
   .delete(itemsController.deleteUserListings);
 
-// create posted item
+// Matches with "/api/items/titleListings/:itemName"
+router.route("/titleListings/:itemName")
+.get(itemsController.findByTitle)
+.delete(itemsController.remove);
  
 
 module.exports = router;
