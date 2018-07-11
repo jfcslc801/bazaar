@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Items from "./pages/Items";
 import NoMatch from "./pages/NoMatch";
+import TestImg from "./pages/TestImg";
 import Nav from "./components/Nav";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -86,6 +87,7 @@ logIn = (inputEmail, inputPassword) => {
           <Route exact path="/" render={()=> <Items signUp={this.signUp} />}/>
         <Route exact path="/Listing" component={Listing} />
         <Route exact path="/Detail" component={Detail} />
+				<Route exact path="/TestImg" component={TestImg}/>
         <Route component={NoMatch} />
           </Switch>
         </div>
