@@ -81,6 +81,7 @@ class App extends Component {
 
             {/* Sending auth as a prop to the details page */}
             <Route exact path="/Detail" render={() => <Detail auth={this.state.auth} />} />
+						<Route exact path="/TestImg" component={TestImg}/>
             <Route component={NoMatch} />
           </Switch>
         </div>
@@ -92,4 +93,3 @@ class App extends Component {
 };
 
 export default App;
-

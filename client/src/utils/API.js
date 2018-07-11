@@ -22,5 +22,8 @@ export default {
   // Saves a item to the database
   saveItem: function (itemData) {
     return axios.post("/api/items", itemData);
-  }
+	},
+	saveImage: function(imageData) {
+    return axios.post("/api/images", imageData);
+	}
 };
