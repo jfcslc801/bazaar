@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { firebase } from './firebase';
 import Items from "./pages/Items";
+import TestImg from "./pages/TestImg";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import LogIn from "./components/LogInModal";
