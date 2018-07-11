@@ -3,7 +3,7 @@
 const firebase = require("firebase/app");
 // import "firebase/auth";
 // import $ from "jquery";
-const $ = require("jquery");
+// const $ = require("jquery");
 
 // const storage = require('@google-cloud/storage')();
 
