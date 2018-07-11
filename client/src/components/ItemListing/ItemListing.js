@@ -36,12 +36,12 @@ let dbOffer = [{
 
 
 const ItemListing = (props) => (
-  <div >
+  <div class="transparent z-depth-0">
     <Row>
       <Col s={12} m={12}>
         {/* <CardPanel className="red black-text cardPanelCenter" > */}
 
-        <Card header={<CardTitle reveal waves='light' />}
+        <Card header={<CardTitle reveal/>}
 
           title={props.name}
           reveal={

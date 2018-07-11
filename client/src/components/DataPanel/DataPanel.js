@@ -5,9 +5,9 @@ import { CardPanel, Row, Col } from 'react-materialize';
 const DataPanel = ({ children }) => (
   <div >
     <Row>
-      <Col s={12} m={12}>
-        <CardPanel
-          className="red lighten-4 black-text cardPanelCenter"
+      <Col >
+        <CardPanel 
+          class="transparent z-depth-0" className="red"
         >
           {children}
         </CardPanel>

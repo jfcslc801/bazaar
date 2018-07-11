@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
-// import listedItems from "./../../../src/listed.json";
-import ItemCard from "./../../components/ItemCard";
-// import { Container } from './../../components/Grid/Container';
-import { Navbar, NavItem, Icon, Container, Button } from 'react-materialize';
-import "./Items.css";
-import DataPanel from '../../components/DataPanel';
+import { Input, Card, CardTitle, Button, Icon } from 'react-materialize';
+import CardP1 from '../../components/CardP';
+import CustomCardPanel from "../../components/CardPanel";
 import ItemListing2 from '../../components/ItemListing2';
 
 class Items extends Component {
@@ -69,15 +66,18 @@ saveItem = event => {
     render() {
         return (
 	
-            <div className="container">
-        <DataPanel>
-          <h4>Welcome: Listings!
-        </h4>
-        </DataPanel>
-        <DataPanel >
-          <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>          
+        <div className="container">
+        <CardP1>
+          <h5>Welcome: Listings!
+        </h5>
+        </CardP1>
+
+
+        <CardP1 className="container">
+          <div  style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>          
                 {this.state.listedItems.map(listed => (
-                <ItemListing2 s={1} className='grid-example'
+                <ItemListing2 
+                removeListed={this.removeListed}
                 saveItem={this.saveItem}
                 id={listed._id}
                 key={listed._id}
@@ -88,15 +88,11 @@ saveItem = event => {
                 location={listed.location}
                         />
                     ))}
-
-
-            </div>
-            
-                </DataPanel >
-
-            </div>
-        );
-    }
+            </div>       
+        </CardP1 >
+      </div>
+    );
+  }
 }
 
 export default Items;

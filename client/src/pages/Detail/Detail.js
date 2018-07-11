@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import { Col, Row, Container } from "../../components/Grid";
-// import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Input, Card, CardTitle, Button, Icon } from 'react-materialize';
-import DeleteBtn from "../../components/DeleteBtn";
-// import CustomCardPanel from "../../components/CardPanel";
 import DataPanel from "../../components/DataPanel";
 import CustomCardPanel from "../../components/CardPanel";
-import ItemCard from "../../components/ItemCard";
 import ItemListing from "../../components/ItemListing";
-import CustomTable from "../../components/Table";
-import { List, ListItem } from "../../components/List";
-import "./Detail.css";
-// const uuidv1 = require('uuid/v1');
-// uuidv1();
+
 
 
 
@@ -112,7 +103,7 @@ class Detail extends Component {
 
          
 
-        <DataPanel>
+        <DataPanel >
           {/* <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}> */}
           {/* This function will map out the Users listings if a user is logged in */}
           {/* {this.returnAuth()} */}
@@ -120,9 +111,9 @@ class Detail extends Component {
 <h5>Your Listings: {this.state.listedItems.length}</h5>
 
  {this.state.listedItems.length > 0 && 
-            <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
               {this.state.listedItems.map(listed => (
-                      <ItemListing s={1} className='grid-example'
+                      <ItemListing
                         removeListed={this.removeListed}
                         id={listed._id}
                         key={listed._id}
@@ -132,11 +123,8 @@ class Detail extends Component {
                         value={listed.listed_price}
                         location={listed.location}
                       />
-                    ))} 
-              
+                    ))}           
             </div>}
-
-
         </DataPanel>
       </div>
     );
