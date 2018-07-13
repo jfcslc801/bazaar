@@ -39,16 +39,6 @@ class Listing extends Component {
 
     document.getElementById('submitButton').innerHTML = `Your listing is uploading, please wait. <img id='loadImage' src='https://i.gifer.com/ZKZg.gif'></img>`;
 
-    API.saveItem({
-      itemName: this.state.itemName,
-      userID: this.props.auth.email,
-      listed_price: this.state.listed_price,
-      description: this.state.description,
-      location: this.state.location,
-      image_url: this.state.image_url
-    })
-      .then(res => ReactDOM.render(<div style={{ color: "red" }}>Your listing has been uploaded! <Icon small>check</Icon></div>, document.getElementById('submitButton')))
-      .catch(err => window.location.reload());
 
 
     if (this.state.imageFile) {
