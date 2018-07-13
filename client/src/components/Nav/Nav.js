@@ -53,11 +53,6 @@ class Nav extends Component {
         <div class="navbar-fixed">
           <Navbar brand={<img src="../assets/bzr2.png" height="80" />} right class="black z-depth-0">
 
-
-
-
-
-
             {/* user logged in Logic */}
             {this.tFunction()}
 
@@ -65,16 +60,6 @@ class Nav extends Component {
               {this.props.username}
             </NavItem>
 
-            <NavItem onClick={() => {
-              // event.preventDefault();
-              // $('#log-in').modal('open')
-            }}
-            >
-              <Icon>search</Icon>
-
-            </NavItem>
-
-            <NavItem href='get-started.html'><i class="large material-icons">location_on</i></NavItem>
           </Navbar>
         </div>
 
