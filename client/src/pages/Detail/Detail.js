@@ -69,11 +69,11 @@ class Detail extends Component {
   returnAuth = property => {
     if (this.props.auth) {
 
-      return <h4>Welcome {this.props.auth[property]}</h4>
+      return <h4 style={{ color: "white" }}>Welcome {this.props.auth[property]}</h4>
 
 
     } else {
-      return <h4>"You are not logged in"</h4>
+      return <h4 style={{ color: "white" }}>"You are not logged in"</h4>
     }
   }
 
@@ -109,12 +109,7 @@ class Detail extends Component {
 
 
         <DataPanel >
-          {/* <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}> */}
-          {/* This function will map out the Users listings if a user is logged in */}
-          {/* {this.returnAuth()} */}
-
-          <h5>Your Listings: {this.state.listedItems.length}</h5>
-
+          <h5 style={{ color: "white" }}> Your Listings: {this.state.listedItems.length}</h5>
           {this.state.listedItems.length > 0 &&
             <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
               {this.state.listedItems.map(listed => (
@@ -132,7 +127,9 @@ class Detail extends Component {
             </div>}
         </DataPanel>
         <DataPanel>
-          <h4 className="blue">Favorites</h4>
+          <h4 style={{ color: "white" }} >Favorites</h4>
+        </DataPanel>
+        <DataPanel>
           {this.state.favoriteItems.length > 0 &&
             <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
               {this.state.favoriteItems.map(listed => (
