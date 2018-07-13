@@ -69,7 +69,7 @@ class Listing extends Component {
             () => {
               console.log('you hit the savedata function');
               console.log('this is afer the savedata log' + this.state.image_url);
-              
+
               API.saveItem({
                 itemName: this.state.itemName,
                 userID: this.props.auth.email,
@@ -141,21 +141,9 @@ class Listing extends Component {
               name="location"
               validate
             />
-
-            <Input label="Image" s={6} style={{ color: "white" }}
-              value={this.state.image_url}
-              onChange={this.handleInputChange}
-              name="image_url"
-              validate
-            />
-            <div id='submitButton' style={{ color: "white" }}>
-              <FormBtn 
-                disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.image_url)}
-
             <Input type='file' onChange={this.fileHandler} />
-
             <div id='submitButton' style={{ color: "white" }}>
-              <Button style={{ background: "white" }} Button floating large className='black' waves='light' icon='check'
+              <FormBtn style={{ background: "white" }} Button floating large className='black' waves='light' icon='check'
                 disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.imageFile)}
                 onClick={this.handleFormSubmit}
               > Submit
