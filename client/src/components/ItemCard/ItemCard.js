@@ -77,9 +77,7 @@ const ItemCard = (props) => (
 					<p>{props.location}</p>
 					<p>{props.userId}</p>
 					<p>{props.id}</p>
-					<span onClick={() => props.removeListed(props.id)} className="remove">
-						𝘅
-        			</span>
+			
 				</CardPanel>
 			</Col>
 		</Row>

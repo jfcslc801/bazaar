@@ -14,7 +14,8 @@ class Detail extends Component {
     super(props);
     this.state = {
       didCheckDB: 0,
-      listedItems: []
+      listedItems: [],
+      favoriteItems: []
     };
   }
 
@@ -22,7 +23,7 @@ class Detail extends Component {
     // This Checks for User and if State has already been updated.
     if (this.props.auth && this.state.didCheckDB === 0) {
       this.loadItems(this.props.auth.email);
-      }
+    }
     // This will clear state if the user logs out
     if (!this.props.auth && this.state.didCheckDB === 1) {
       this.clearState();
@@ -33,7 +34,7 @@ class Detail extends Component {
   //   if (this.props.auth) {
 
   //     console.log('user did load');
-      
+
   //   this.loadItems(this.props.auth.email);
   //   }
   // }
@@ -42,12 +43,16 @@ class Detail extends Component {
     console.log("Before Calling API");
     this.setState({ didCheckDB: 1 }, () => {
       API.getUserItems(user)
-      .then(res =>
-        this.setState({ listedItems: res.data })
-      )
-      .catch(err => console.log(err));
+        .then(res =>
+          this.setState({ listedItems: res.data })
+        )
+        .catch(err => console.log(err));
+      API.getFavorites(user)
+        .then(res =>
+          this.setState({ favoriteItems: res.data })
+        )
+        .catch(err => console.log(err));
     })
-    
   };
 
   removeListed = (event, _id) => {
@@ -64,7 +69,7 @@ class Detail extends Component {
   returnAuth = property => {
     if (this.props.auth) {
 
-          return <h4>Welcome {this.props.auth[property]}</h4>
+      return <h4>Welcome {this.props.auth[property]}</h4>
 
 
     } else {
@@ -74,17 +79,17 @@ class Detail extends Component {
 
   getData = user => {
     API.getUserItems(user)
-    .then(res =>
-      this.setState({ listedItems: res.data })
-    ).catch(err => console.log(err));
-    
+      .then(res =>
+        this.setState({ listedItems: res.data })
+      ).catch(err => console.log(err));
+
   }
 
   clearState = () => {
-    this.setState({ 
+    this.setState({
       listedItems: [],
       didCheckDB: 0
-     })
+    })
   }
 
   render() {
@@ -96,34 +101,52 @@ class Detail extends Component {
       <div className="container">
         {/* This function will map out the Users listings if a user is logged in */}
         <DataPanel>
-        {this.returnAuth("email")}
+          {this.returnAuth("email")}
         </DataPanel>
 
 
 
-         
+
 
         <DataPanel >
           {/* <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}> */}
           {/* This function will map out the Users listings if a user is logged in */}
           {/* {this.returnAuth()} */}
 
-<h5>Your Listings: {this.state.listedItems.length}</h5>
+          <h5>Your Listings: {this.state.listedItems.length}</h5>
 
- {this.state.listedItems.length > 0 && 
-            <div style={{ display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
+          {this.state.listedItems.length > 0 &&
+            <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
               {this.state.listedItems.map(listed => (
-                      <ItemListing
-                        removeListed={this.removeListed}
-                        id={listed._id}
-                        key={listed._id}
-                        name={listed.itemName}
-                        image={listed.image_url}
-                        user={listed.userID}
-                        value={listed.listed_price}
-                        location={listed.location}
-                      />
-                    ))}           
+                <ItemListing
+                  removeListed={this.removeListed}
+                  id={listed._id}
+                  key={listed._id}
+                  name={listed.itemName}
+                  image={listed.image_url}
+                  user={listed.userID}
+                  value={listed.listed_price}
+                  location={listed.location}
+                />
+              ))}
+            </div>}
+        </DataPanel>
+        <DataPanel>
+          <h4 className="blue">Favorites</h4>
+          {this.state.favoriteItems.length > 0 &&
+            <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
+              {this.state.favoriteItems.map(listed => (
+                <ItemListing
+                  removeListed={this.removeListed}
+                  id={listed._id}
+                  key={listed._id}
+                  name={listed.itemName}
+                  image={listed.image_url}
+                  user={listed.userID}
+                  value={listed.listed_price}
+                  location={listed.location}
+                />
+              ))}
             </div>}
         </DataPanel>
       </div>

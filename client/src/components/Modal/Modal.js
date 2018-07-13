@@ -28,7 +28,7 @@ class CustomModal extends React.Component {
       <div style={styles}>
         <Modal
           header='Modal Header'
-          trigger={<Button style={{ bottom: '-15px', right: '15px' }} floating tiny className='red' waves='green' icon='delete'></Button>}>
+          trigger={<Button floating large className='red' waves='light' icon='add' />}>
           <div>
             {this.props.children}
           </div>

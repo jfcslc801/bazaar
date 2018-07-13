@@ -9,9 +9,9 @@ module.exports = {
 		.then(dbModel => res.json(dbModel))
 		.catch(err => res.status(422).json(err));
 	},
-  findByItemId: function(req, res) {
+  findByUser: function(req, res) {
     db.Favorite
-      .find({favoriteItem: req.params.favoriteItem})
+      .find({userID: req.params.favoriteUser})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

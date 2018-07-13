@@ -7,10 +7,12 @@ import API from "../../utils/API";
 // import { List, ListItem } from "../../components/List";
 import { TextArea, FormBtn } from "../../components/Form";
 import ReactDOM from "react-dom";
+
 import { Row, Input, Card, Col, CardTitle, Button, Icon, } from 'react-materialize';
 // import Button from '@material-ui/core/Button';
 import "./Listing.css";
 const CLOUDINARY_UPLOAD_PRESET = 'tqvt7jrm';
+
 
 class Listing extends Component {
   state = {
@@ -36,6 +38,18 @@ class Listing extends Component {
     event.preventDefault();
 
     document.getElementById('submitButton').innerHTML = `Your listing is uploading, please wait. <img id='loadImage' src='https://i.gifer.com/ZKZg.gif'></img>`;
+
+    API.saveItem({
+      itemName: this.state.itemName,
+      userID: this.props.auth.email,
+      listed_price: this.state.listed_price,
+      description: this.state.description,
+      location: this.state.location,
+      image_url: this.state.image_url
+    })
+      .then(res => ReactDOM.render(<div style={{ color: "red" }}>Your listing has been uploaded! <Icon small>check</Icon></div>, document.getElementById('submitButton')))
+      .catch(err => window.location.reload());
+
 
     if (this.state.imageFile) {
       console.log(this.state.imageFile);
@@ -127,6 +141,17 @@ class Listing extends Component {
               name="location"
               validate
             />
+
+            <Input label="Image" s={6} style={{ color: "white" }}
+              value={this.state.image_url}
+              onChange={this.handleInputChange}
+              name="image_url"
+              validate
+            />
+            <div id='submitButton' style={{ color: "white" }}>
+              <FormBtn 
+                disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.image_url)}
+
             <Input type='file' onChange={this.fileHandler} />
 
             <div id='submitButton' style={{ color: "white" }}>
@@ -134,7 +159,7 @@ class Listing extends Component {
                 disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.imageFile)}
                 onClick={this.handleFormSubmit}
               > Submit
-          </Button>
+          </FormBtn>
             </div>
           </Row>
         </DataPanel>

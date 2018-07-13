@@ -29,6 +29,10 @@ export default {
 	saveImage: function(imageData) {
     return axios.post("/api/images", imageData);
   },
+
+  getFavorites: function(user){
+    return axios.get("api/favorites/" + user)
+  },
   cloudinaryImage: function(formData) {
     return axios({
       url: CLOUDINARY_URL,
@@ -38,5 +42,6 @@ export default {
       },
       data: formData
     })
+
   }
 };

@@ -51,7 +51,7 @@ class Nav extends Component {
 
 
         <div class="navbar-fixed">
-          <Navbar brand={<img src="../assets/bzr.png" height="80" />} right class="transparent z-depth-0">
+          <Navbar brand={<img src="../assets/bzr2.png" height="80" />} right class="black z-depth-0">
 
 
 
