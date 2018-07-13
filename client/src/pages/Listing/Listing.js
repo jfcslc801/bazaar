@@ -7,7 +7,12 @@ import API from "../../utils/API";
 // import { List, ListItem } from "../../components/List";
 import { TextArea, FormBtn } from "../../components/Form";
 import ReactDOM from "react-dom";
-import { Row, Input, Card, Col, CardTitle, Button, Icon } from 'react-materialize';
+
+import { Row, Input, Card, Col, CardTitle, Button, Icon, } from 'react-materialize';
+// import Button from '@material-ui/core/Button';
+import "./Listing.css";
+const CLOUDINARY_UPLOAD_PRESET = 'tqvt7jrm';
+
 
 class Listing extends Component {
   state = {
@@ -17,10 +22,9 @@ class Listing extends Component {
     description: "",
     location: "",
     date: "",
-    image_url: ""
+    image_url: null,
+    imageFile: null
   };
-
-
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -34,6 +38,7 @@ class Listing extends Component {
     event.preventDefault();
 
     document.getElementById('submitButton').innerHTML = `Your listing is uploading, please wait. <img id='loadImage' src='https://i.gifer.com/ZKZg.gif'></img>`;
+
     API.saveItem({
       itemName: this.state.itemName,
       userID: this.props.auth.email,
@@ -46,7 +51,47 @@ class Listing extends Component {
       .catch(err => window.location.reload());
 
 
+    if (this.state.imageFile) {
+      console.log(this.state.imageFile);
+
+      let fd = new FormData();
+      fd.append('file', this.state.imageFile);
+      fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      // This sends the image to the Cloudinary server for storage. Will receive URL as part of callback
+      API.cloudinaryImage(fd)
+        .then(res => {
+          console.log(res.data.secure_url)
+          this.setState({
+            image_url: res.data.secure_url
+          },
+            // Run Callback - Once state has been updated, then send info over to database 
+            () => {
+              console.log('you hit the savedata function');
+              console.log('this is afer the savedata log' + this.state.image_url);
+              
+              API.saveItem({
+                itemName: this.state.itemName,
+                userID: this.props.auth.email,
+                listed_price: this.state.listed_price,
+                description: this.state.description,
+                location: this.state.location,
+                image_url: this.state.image_url
+              })
+                .then(res => ReactDOM.render(<div>Your listing has been uploaded! <Icon small>check</Icon></div>, document.getElementById('submitButton')))
+                .catch(err => window.location.reload());
+            })
+        })
+        .catch(err => console.log(err))
+    }
   };
+
+  fileHandler = event => {
+    console.log(event.target.files[0]);
+    this.setState({
+      imageFile: event.target.files[0]
+    })
+  }
 
   welcomeMessage = () => {
     if (this.props.auth) {
@@ -63,8 +108,6 @@ class Listing extends Component {
 
     console.log(this);
     return (
-
-
 
       <div className="container">
         <DataPanel>
@@ -98,6 +141,7 @@ class Listing extends Component {
               name="location"
               validate
             />
+
             <Input label="Image" s={6} style={{ color: "white" }}
               value={this.state.image_url}
               onChange={this.handleInputChange}
@@ -107,6 +151,12 @@ class Listing extends Component {
             <div id='submitButton' style={{ color: "white" }}>
               <FormBtn 
                 disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.image_url)}
+
+            <Input type='file' onChange={this.fileHandler} />
+
+            <div id='submitButton' style={{ color: "white" }}>
+              <Button style={{ background: "white" }} Button floating large className='black' waves='light' icon='check'
+                disabled={!(this.state.itemName && this.props.auth && this.state.listed_price && this.state.description && this.state.imageFile)}
                 onClick={this.handleFormSubmit}
               > Submit
           </FormBtn>

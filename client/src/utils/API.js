@@ -1,4 +1,7 @@
 import axios from "axios";
+// Code for uploading images
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/baazaar/upload';
+
 
 export default {
   // Gets all items
@@ -26,7 +29,19 @@ export default {
 	saveImage: function(imageData) {
     return axios.post("/api/images", imageData);
   },
+
   getFavorites: function(user){
     return axios.get("api/favorites/" + user)
+  },
+  cloudinaryImage: function(formData) {
+    return axios({
+      url: CLOUDINARY_URL,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application:x-www-form-urlencoded'
+      },
+      data: formData
+    })
+
   }
 };
