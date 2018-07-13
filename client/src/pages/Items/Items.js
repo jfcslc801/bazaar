@@ -70,7 +70,7 @@ class Items extends Component {
     return (
       <div className="container">
         <CardP1>
-          <h5>Welcome: Listings!</h5>
+          <h5 class="white-text"> Welcome: Listings!</h5>
         </CardP1>
         <CardP1 className="container">
           <Row>

@@ -86,8 +86,8 @@ class Listing extends Component {
   welcomeMessage = () => {
     if (this.props.auth) {
       return <div>
-        <h3>Welcome {this.props.auth.email}</h3>
-        <h5> Create your Listing!</h5>
+        <h3 class="white-text">Welcome {this.props.auth.email}</h3>
+        <h5 class="white-text"> Create your Listing!</h5>
       </div>
     }
 
