@@ -5,6 +5,7 @@ import CardP1 from '../../components/CardP';
 import SimpleModalWrapped2 from '../../components/OfferModal';
 import CustomCardPanel from "../../components/CardPanel";
 import ItemListing2 from '../../components/ItemListing2';
+import "./Items.css"
 
 class Items extends Component {
 
