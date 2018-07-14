@@ -87,6 +87,7 @@ class Items extends Component {
                   user={listed.userID}
                   value={listed.listed_price}
                   location={listed.location}
+                  auth={this.props.auth}
                 />
               ))}
             </div>

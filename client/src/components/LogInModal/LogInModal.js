@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import { auth } from '../../firebase';
+import "./LogInModal.css";
 
 const styles = theme => ({
   paper: {
@@ -26,8 +27,8 @@ function getModalStyle() {
 
 class LogIn extends Component {
   constructor(props) {
-		super(props);
-		this.state = {
+    super(props);
+    this.state = {
       email: '',
       password: ''
     };
@@ -87,7 +88,7 @@ class LogIn extends Component {
     if (this.props.auth) {
       return (
 
-        <div style={getModalStyle()} className={classes.paper}>
+        <div style={getModalStyle()} className={[classes.paper, "testing"].join(' ')}>
         <h3>Hello {this.props.auth.email}</h3>
         <Button onClick={auth.doSignOut} waves='light'>Log Out</Button>
         </div>

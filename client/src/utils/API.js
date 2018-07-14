@@ -16,7 +16,6 @@ export default {
   // Gets the item with the given userId
   getUserItems: function (user) {
     return axios.get("/api/items/userListings/" + user);
-
   },
   // Deletes the item with the given id
   deleteItem: function (id) {
@@ -29,9 +28,8 @@ export default {
 	saveImage: function(imageData) {
     return axios.post("/api/images", imageData);
   },
-
   getFavorites: function(user){
-    return axios.get("api/favorites/" + user)
+    return axios.get("api/favorites/" + user);
   },
   cloudinaryImage: function(formData) {
     return axios({
@@ -42,6 +40,11 @@ export default {
       },
       data: formData
     })
-
+  },
+  getOffers: function(itemID) {
+    return axios.get('/api/offers/' + itemID);
+  },
+  saveOffer: function(offerData) {
+    return axios.post("/api/offers", offerData);
   }
 };

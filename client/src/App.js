@@ -75,10 +75,10 @@ class App extends Component {
 
 
           <Switch>
-            <Route exact path="/"  component={Items} />
+            <Route exact path="/" render={() => <Items auth={this.state.auth} />} />
 
             {/* Sending auth as a prop to the details page */}
-            <Route exact path="/Listing"render={() => <Listing auth={this.state.auth} />} />
+            <Route exact path="/Listing" render={() => <Listing auth={this.state.auth} />} />
 
             {/* Sending auth as a prop to the details page */}
             <Route exact path="/Detail" render={() => <Detail auth={this.state.auth} />} />
