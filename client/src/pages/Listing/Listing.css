@@ -12,3 +12,6 @@
 #loadImage {
     max-height: 25px;
 }
+h3, h4, h5 {
+    color: white !important;
+}
