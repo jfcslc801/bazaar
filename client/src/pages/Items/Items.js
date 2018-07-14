@@ -5,6 +5,7 @@ import CardP1 from '../../components/CardP';
 import SimpleModalWrapped2 from '../../components/OfferModal';
 import CustomCardPanel from "../../components/CardPanel";
 import ItemListing2 from '../../components/ItemListing2';
+import "./Items.css"
 
 class Items extends Component {
 
@@ -70,7 +71,7 @@ class Items extends Component {
     return (
       <div className="container">
         <CardP1>
-          <h5 style={{ color: "white"}}>Welcome: Listings!</h5>
+          <h5> Welcome: Listings!</h5>
         </CardP1>
         <CardP1 className="container">
           <Row>

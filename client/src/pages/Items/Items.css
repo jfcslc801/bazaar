@@ -16,3 +16,7 @@
 .card > .remove:hover {
   color: #d50000;
 }
+
+h5 {
+  color: white !important;
+}

@@ -5,7 +5,7 @@ import { Input, Card, CardTitle, Button, Icon } from 'react-materialize';
 import DataPanel from "../../components/DataPanel";
 import CustomCardPanel from "../../components/CardPanel";
 import ItemListing from "../../components/ItemListing";
-
+import "./Detail.css";
 
 
 
@@ -127,9 +127,10 @@ class Detail extends Component {
             </div>}
         </DataPanel>
         <DataPanel>
-          <h4 style={{ color: "white" }} >Favorites</h4>
+          <h4>Favorites</h4>
         </DataPanel>
         <DataPanel>
+
           {this.state.favoriteItems.length > 0 &&
             <div style={{ background: "", display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "space-around" }}>
               {this.state.favoriteItems.map(listed => (
