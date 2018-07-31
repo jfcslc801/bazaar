@@ -55,7 +55,7 @@ class SimpleModal extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <div style={getModalStyle()} className={classes.paper}>
+          <div style={getModalStyle()} className={[classes.paper, "testing"].join(' ')}>
             <Typography variant="title" id="modal-title">
               Barter!
             </Typography>

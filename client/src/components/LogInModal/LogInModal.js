@@ -97,7 +97,7 @@ class LogIn extends Component {
     } else {
       return (
 
-        <div style={getModalStyle()} className={classes.paper}>
+        <div style={getModalStyle()} className={[classes.paper, "testing"].join(' ')}>
         <h3>Log In:</h3>
         <Input s={12} name="email" label="Email" validate value={this.state.email} onChange={this.handleChange}><Icon>account_circle</Icon></Input>
         <Input s={12} name="password" label="Password" validate value={this.state.password} onChange={this.handleChange} type='password'><Icon>lock</Icon></Input>
